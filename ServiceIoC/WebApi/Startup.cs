@@ -1,0 +1,42 @@
+﻿using System.Reflection;
+using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
+using Core.Infrastructure;
+using Owin;
+
+namespace WebApi
+{
+    public static class Startup
+    {
+        // This code configures Web API. The Startup class is specified as a type
+        // parameter in the WebApp.Start method.
+        public static void ConfigureApp(IAppBuilder appBuilder)
+        {
+            // Configure Web API for self-host. 
+            HttpConfiguration config = new HttpConfiguration();
+
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = RouteParameter.Optional }
+            //);
+            config.MapHttpAttributeRoutes();
+
+            var builder = new ContainerBuilder();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
+            builder.Register<IActorFactory>(a => new ReliableFactory());
+            builder.Register<IServiceFactory>(a => new ReliableFactory());
+
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+
+            appBuilder.UseAutofacMiddleware(container);
+            appBuilder.UseAutofacWebApi(config);
+
+            appBuilder.UseWebApi(config);
+        }
+    }
+}

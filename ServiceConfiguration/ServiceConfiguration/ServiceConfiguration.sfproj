@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>7bfabeff-39d4-4925-a7c3-a71333c68b88</ProjectGuid>
+    <ProjectVersion>1.0</ProjectVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="ApplicationPackageRoot\ApplicationManifest.xml" />
+    <None Include="ApplicationParameters\Cloud.xml" />
+    <None Include="ApplicationParameters\CustomEnvironment.xml" />
+    <None Include="ApplicationParameters\Local.xml" />
+    <None Include="PublishProfiles\Cloud.xml" />
+    <None Include="PublishProfiles\Local.xml" />
+    <None Include="Scripts\Deploy-FabricApplication.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyActor\MyActor.csproj" />
+    <ProjectReference Include="..\MyService\MyService.csproj" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets" />
+</Project>

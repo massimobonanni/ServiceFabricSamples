@@ -1,0 +1,96 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceConfiguration", "ServiceConfiguration\ServiceConfiguration.sfproj", "{7BFABEFF-39D4-4925-A7C3-A71333C68B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyActor", "MyActor\MyActor.csproj", "{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyActor.Interfaces", "MyActor.Interfaces\MyActor.Interfaces.csproj", "{A208C11F-1045-4A96-97FA-27D5D32C273D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyService", "MyService\MyService.csproj", "{6B0F9F51-F235-44DF-85BC-6C976722C86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{F227C24B-7E10-4E45-8F13-F24F628E05A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.ActiveCfg = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.Build.0 = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.Deploy.0 = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|Any CPU.ActiveCfg = Release|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|x64.ActiveCfg = Release|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|x64.Build.0 = Release|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|x64.Deploy.0 = Release|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|x64.ActiveCfg = Debug|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|x64.Build.0 = Debug|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|Any CPU.ActiveCfg = Release|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|x64.ActiveCfg = Release|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|x64.Build.0 = Release|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|x64.ActiveCfg = Debug|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|x64.Build.0 = Debug|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Release|Any CPU.ActiveCfg = Release|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Release|x64.ActiveCfg = Release|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Release|x64.Build.0 = Release|x64
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Debug|x64.Build.0 = Debug|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|x64.ActiveCfg = Release|Any CPU
+		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|x64.Build.0 = Release|Any CPU
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|x64.ActiveCfg = Debug|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|x64.Build.0 = Debug|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Release|Any CPU.ActiveCfg = Release|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Release|x64.ActiveCfg = Release|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Release|x64.Build.0 = Release|x64
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Debug|x64.Build.0 = Debug|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Release|x64.ActiveCfg = Release|Any CPU
+		{F227C24B-7E10-4E45-8F13-F24F628E05A9}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://mabonann.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConsoleApplication\\ConsoleApplication.csproj
+		SccProjectName1 = ConsoleApplication
+		SccLocalPath1 = ConsoleApplication
+		SccProjectUniqueName2 = Core\\Core.csproj
+		SccProjectName2 = Core
+		SccLocalPath2 = Core
+		SccProjectUniqueName3 = MyActor.Interfaces\\MyActor.Interfaces.csproj
+		SccProjectName3 = MyActor.Interfaces
+		SccLocalPath3 = MyActor.Interfaces
+		SccProjectUniqueName4 = MyActor\\MyActor.csproj
+		SccProjectName4 = MyActor
+		SccLocalPath4 = MyActor
+		SccProjectUniqueName5 = MyService\\MyService.csproj
+		SccProjectName5 = MyService
+		SccLocalPath5 = MyService
+		SccProjectUniqueName6 = ServiceConfiguration\\ServiceConfiguration.sfproj
+		SccProjectName6 = ServiceConfiguration
+		SccLocalPath6 = ServiceConfiguration
+	EndGlobalSection
+EndGlobal

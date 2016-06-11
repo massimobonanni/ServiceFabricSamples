@@ -24,11 +24,13 @@ namespace AffidoActor
     {
         public Task<bool> TakeInCharge(string idOdl)
         {
+            ActorEventSource.Current.ActorMessage(this, $"{Id} - TakeInCharge({idOdl})");
             return Task.FromResult(true);
         }
 
         protected override Task<AffidoState> InitializeState()
         {
+
             return Task.FromResult(new AffidoState() { });
         }
 

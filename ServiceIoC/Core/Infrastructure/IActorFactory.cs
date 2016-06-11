@@ -8,7 +8,7 @@ namespace Core.Infrastructure
 {
     public interface IActorFactory
     {
-        TActorInterface CreateActor<TActorInterface>(string actorId,
+        TActorInterface Create<TActorInterface>(string actorId,
             Uri serviceUri, string listenerName) where TActorInterface : IActor;
 
         TActorInterface Create<TActorInterface>(ActorId actorId, 
@@ -22,7 +22,7 @@ namespace Core.Infrastructure
 
     public interface IServiceFactory
     {
-        TServiceInterface CreateService<TServiceInterface>(Uri serviceUri, 
+        TServiceInterface Create<TServiceInterface>(Uri serviceUri, 
             ServicePartitionKey partitionKey = null, 
             TargetReplicaSelector targetReplicaSelector = TargetReplicaSelector.Default, 
             string listenerName = null) where TServiceInterface: IService;

@@ -1,9 +1,15 @@
-﻿using System.Reflection;
+﻿#define UNITY 
+
+using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Core.Infrastructure;
+using Microsoft.Practices.Unity;
 using Owin;
+using Unity.WebApi;
 
 namespace WebApi
 {
@@ -23,6 +29,26 @@ namespace WebApi
             //);
             config.MapHttpAttributeRoutes();
 
+            ConfigureAutofac(appBuilder,config);
+            ConfigureUnity(appBuilder, config);
+
+            appBuilder.UseWebApi(config);
+        }
+
+        [Conditional("UNITY")]
+        private static void ConfigureUnity(IAppBuilder appBuilder, HttpConfiguration config)
+        {
+            var container = new UnityContainer();
+
+            container.RegisterType<IActorFactory, ReliableFactory>();
+            container.RegisterType<IServiceFactory, ReliableFactory>();
+
+            config.DependencyResolver = new UnityDependencyResolver(container);
+        }
+
+        [Conditional("AUTOFAC")]
+        private static void  ConfigureAutofac(IAppBuilder appBuilder, HttpConfiguration config)
+        {
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -35,8 +61,6 @@ namespace WebApi
 
             appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseAutofacWebApi(config);
-
-            appBuilder.UseWebApi(config);
         }
     }
 }

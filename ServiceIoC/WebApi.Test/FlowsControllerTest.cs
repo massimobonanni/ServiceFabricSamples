@@ -23,7 +23,7 @@ namespace WebApi.Test
             var idFlow = "111";
             var idOdl = "111";
 
-            actorFactory.Stub(x => x.CreateActor<IAffidoActor>(idFlow,
+            actorFactory.Stub(x => x.Create<IAffidoActor>(idFlow,
                 new System.Uri("fabric:/ServiceIoC/AffidoActorService"), null)).Return(actor);
 
             actor.Stub(x => x.TakeInCharge(idOdl)).Return(Task.FromResult(true));

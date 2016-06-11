@@ -5,6 +5,7 @@ using System.Web.Http;
 using AffidoActor.Interfaces;
 using Core.Infrastructure;
 using Microsoft.ServiceFabric.Actors;
+using Microsoft.ServiceFabric.Actors.Client;
 using WebApi.Core.Requests.Flows;
 using WebApi.Core.Responses.Flows;
 
@@ -23,13 +24,16 @@ namespace WebApi.Controllers
 
         [Route("api/customers/{idCustomer}/flows/{idFlow}/takeincharge/{idOdl}")]
         [HttpGet]
-        public async Task<TakeInChargeResponse> TakeInCharge([FromUri] string idCustomer, [FromUri] string idFlow, [FromUri] string idOdl, [FromUri] TakeInChargeRequest request)
+        public async Task<TakeInChargeResponse> TakeInCharge([FromUri] string idCustomer,
+            [FromUri] string idFlow, [FromUri] string idOdl,
+            [FromUri] TakeInChargeRequest request)
         {
             if (String.Compare(idCustomer, "EQT", StringComparison.OrdinalIgnoreCase) != 0)
-                ThrowHttpResponseException(System.Net.HttpStatusCode.NotFound, "Customer inesistente");
+                ThrowHttpResponseException(System.Net.HttpStatusCode.NotFound,
+                    "Customer inesistente");
 
             var actor = ActorFactory.Create<IAffidoActor>(new ActorId(idFlow),
-                new System.Uri("fabric:/ServiceIoC/AffidoActorService"));
+                           new System.Uri("fabric:/ServiceIoC/AffidoActorService"));
 
             var result = await actor.TakeInCharge(idOdl);
 
@@ -37,5 +41,9 @@ namespace WebApi.Controllers
 
             return response;
         }
+
+        // Implementazioni delle action
     }
 }
+
+

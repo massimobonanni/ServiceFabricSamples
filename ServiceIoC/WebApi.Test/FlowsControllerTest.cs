@@ -6,6 +6,7 @@ using Core.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 using AffidoActor.Interfaces;
+using Microsoft.ServiceFabric.Actors;
 using WebApi.Controllers;
 
 namespace WebApi.Test
@@ -23,11 +24,6 @@ namespace WebApi.Test
             var idFlow = "111";
             var idOdl = "111";
 
-            actorFactory.Stub(x => x.Create<IAffidoActor>(idFlow,
-                new System.Uri("fabric:/ServiceIoC/AffidoActorService"), null)).Return(actor);
-
-            actor.Stub(x => x.TakeInCharge(idOdl)).Return(Task.FromResult(true));
-
             var target = new FlowsController(actorFactory);
 
             try
@@ -39,8 +35,32 @@ namespace WebApi.Test
                 Assert.AreEqual(ex.Response.StatusCode, HttpStatusCode.NotFound);
             }
 
+        }
 
+        [TestMethod]
+        public void TakeInCharge_ReturnErrorResponseWhenActorReturnFalse()
+        {
+            // ARRANGE
+            var actorFactory = MockRepository.GenerateStub<IActorFactory>();
+            var actor = MockRepository.GenerateStub<IAffidoActor>();
 
+            var idCustomer = "eqt";
+            var idFlow = "111";
+            var idOdl = "111";
+
+            actorFactory.Stub(x => x.Create<IAffidoActor>(new ActorId(idFlow),
+                new System.Uri("fabric:/ServiceIoC/AffidoActorService"))).Return(actor);
+
+            actor.Stub(x => x.TakeInCharge(idOdl)).Return(Task.FromResult(false));
+
+            var target = new FlowsController(actorFactory);
+
+            // ACT
+            var response = target.TakeInCharge(idCustomer, idFlow, idOdl, null).Result;
+
+            // ASSERT
+            Assert.IsFalse(response.IsSuccess);
         }
     }
+
 }

@@ -22,15 +22,25 @@ namespace AffidoActor
     [StatePersistence(StatePersistence.Persisted)]
     internal class AffidoActor : StatefulActor<AffidoState>, IAffidoActor
     {
-        public Task<bool> TakeInCharge(string idOdl)
+        public AffidoActor() : base()
+        {
+        }
+
+        public AffidoActor(IActorStateManager stateManager) : base(stateManager)
+        {
+        }
+
+        public async Task<bool> TakeInCharge(string idOdl)
         {
             ActorEventSource.Current.ActorMessage(this, $"{Id} - TakeInCharge({idOdl})");
-            return Task.FromResult(true);
+            var state = await this.GetStateAsync();
+            var odl = state.OdlList.FirstOrDefault(o => o.Id == idOdl);
+            if (odl == null) return false;
+            return true;
         }
 
         protected override Task<AffidoState> InitializeState()
         {
-
             return Task.FromResult(new AffidoState() { });
         }
 

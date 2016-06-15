@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actors", "Actors", "{A00D1E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Test", "WebApi.Test\WebApi.Test.csproj", "{BB35C1BC-67BA-463C-ABF6-F6F723949484}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mocks", "Mocks\Mocks.csproj", "{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffidoActor.Test", "AffidoActor.Test\AffidoActor.Test.csproj", "{1F437A71-FDC8-4B76-BDF6-06DD34449E82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,22 @@ Global
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|x64.ActiveCfg = Release|Any CPU
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|x64.Build.0 = Release|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|x64.Build.0 = Debug|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|x64.ActiveCfg = Release|Any CPU
+		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|x64.Build.0 = Release|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,9 +109,10 @@ Global
 		{0F5414E2-41EF-4A7C-9C56-7567971EE81A} = {A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}
 		{5F4518F4-3D15-4CDA-A5C3-713CBE91B64B} = {4A67CCB0-E9DD-4E9C-81EB-289CF43F0AF8}
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484} = {4A67CCB0-E9DD-4E9C-81EB-289CF43F0AF8}
+		{1F437A71-FDC8-4B76-BDF6-06DD34449E82} = {A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://mabonann.visualstudio.com/
 		SccLocalPath0 = .
@@ -121,5 +142,12 @@ Global
 		SccProjectTopLevelParentUniqueName7 = ServiceIoC.sln
 		SccProjectName7 = WebApi.Test
 		SccLocalPath7 = WebApi.Test
+		SccProjectUniqueName8 = Mocks\\Mocks.csproj
+		SccProjectName8 = Mocks
+		SccLocalPath8 = Mocks
+		SccProjectUniqueName9 = AffidoActor.Test\\AffidoActor.Test.csproj
+		SccProjectTopLevelParentUniqueName9 = ServiceIoC.sln
+		SccProjectName9 = AffidoActor.Test
+		SccLocalPath9 = AffidoActor.Test
 	EndGlobalSection
 EndGlobal

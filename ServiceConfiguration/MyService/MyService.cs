@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Fabric;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,7 +68,20 @@ namespace MyService
 
                 var configValue = configSection.Settings.Sections["MyConfigSection"].Parameters["MyParameter"].Value;
 
-               ServiceEventSource.Current.ServiceMessage(this, $"Configurazione: {configValue}");
+                ServiceEventSource.Current.ServiceMessage(this, $"Configurazione: {configValue}");
+
+                var dataPkg = Context.CodePackageActivationContext.GetDataPackageObject("SvcData");
+
+                var customDataFilePath = $@"{dataPkg.Path}\data.json";
+
+                string fileContent;
+                using (var reader = File.OpenText(customDataFilePath))
+                {
+                    fileContent = await reader.ReadToEndAsync();
+                }
+
+                ServiceEventSource.Current.ServiceMessage(this, $"Data: {fileContent}");
+
 
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }

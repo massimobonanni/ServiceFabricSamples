@@ -21,7 +21,8 @@ namespace ConsoleApplication
 
                 var setting = actor.GetConfiguration().Result;
                 Console.WriteLine(setting);
-
+                var fileContent = actor.GetFile().Result;
+                Console.WriteLine(fileContent);
 
                 Thread.Sleep(250);
             }

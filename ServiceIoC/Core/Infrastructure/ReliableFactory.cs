@@ -11,27 +11,63 @@ namespace Core.Infrastructure
     public class ReliableFactory : IActorFactory, IServiceFactory
     {
         TActorInterface IActorFactory.Create<TActorInterface>(string actorId,
-           Uri serviceUri, string listenerName) 
+           Uri serviceUri, string listenerName)
         {
             return ActorProxy.Create<TActorInterface>(new ActorId(actorId), serviceUri, listenerName);
         }
 
+        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, Uri serviceUri)
+        {
+            return ActorProxy.Create<TActorInterface>(actorId, serviceUri);
+        }
+
         TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, Uri serviceUri,
-           string listenerName = null) 
+           string listenerName)
         {
             return ActorProxy.Create<TActorInterface>(actorId, serviceUri, listenerName);
         }
 
-        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName = null,
-           string serviceName = null,
-           string listenerName = null) 
+        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId)
+        {
+            return ActorProxy.Create<TActorInterface>(actorId);
+        }
+
+        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName)
+        {
+            return ActorProxy.Create<TActorInterface>(actorId, applicationName);
+        }
+
+        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName,
+           string serviceName)
         {
             return ActorProxy.Create<TActorInterface>(actorId, applicationName, serviceName);
         }
 
+        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName,
+           string serviceName, string listenerName)
+        {
+            return ActorProxy.Create<TActorInterface>(actorId, applicationName, serviceName, listenerName);
+        }
+        TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri)
+        {
+            return ServiceProxy.Create<TServiceInterface>(serviceUri);
+        }
+
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-           ServicePartitionKey partitionKey = null,
-           TargetReplicaSelector targetReplicaSelector = TargetReplicaSelector.Default, string listenerName = null) 
+          ServicePartitionKey partitionKey )
+        {
+            return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey);
+        }
+
+        TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
+          ServicePartitionKey partitionKey , TargetReplicaSelector targetReplicaSelector)
+        {
+            return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey, targetReplicaSelector);
+        }
+
+        TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
+          ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector,
+          string listenerName)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey, targetReplicaSelector, listenerName);
         }

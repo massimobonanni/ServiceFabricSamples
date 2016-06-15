@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,10 +68,23 @@ namespace MyActor
             var configValue = configSection.Settings.Sections["MySection"].Parameters["MyParameter"].Value;
 
 
-            var configValue = 
-                ActorService.Context.GetConfigurationValue("MySection", "MyParameter");
-
             return Task.FromResult(configValue);
+        }
+
+        public async Task<string> GetFile()
+        {
+            var dataPkg =
+                ActorService.Context.CodePackageActivationContext.GetDataPackageObject("SvcData");
+
+            var customDataFilePath = $@"{dataPkg.Path}\data.json";
+
+            string fileContent;
+            using (var reader = File.OpenText(customDataFilePath))
+            {
+                fileContent = await reader.ReadToEndAsync();
+            }
+
+            return fileContent;
         }
     }
 }

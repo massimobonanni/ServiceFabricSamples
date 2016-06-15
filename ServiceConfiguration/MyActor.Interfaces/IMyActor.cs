@@ -27,5 +27,8 @@ namespace MyActor.Interfaces
         Task SetCountAsync(int count);
 
         Task<string> GetConfiguration();
+
+
+        Task<string> GetFile();
     }
 }

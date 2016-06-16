@@ -66,6 +66,10 @@
       <HintPath>..\packages\Microsoft.ServiceFabric.Services.2.0.217\lib\net45\Microsoft.ServiceFabric.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Fabric, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
       <HintPath>..\packages\Microsoft.ServiceFabric.5.0.217\lib\net45\System.Fabric.dll</HintPath>
@@ -105,6 +109,10 @@
     <ProjectReference Include="..\Mocks\Mocks.csproj">
       <Project>{ebaa6b5d-e4b6-4e7c-ba4e-95dcaa5eca40}</Project>
       <Name>Mocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OdlActor.Interfaces\OdlActor.Interfaces.csproj">
+      <Project>{fa093c32-7e7f-451d-9835-92b50df05a7f}</Project>
+      <Name>OdlActor.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

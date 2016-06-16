@@ -49,12 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\ErrorDto.cs" />
+    <Compile Include="DTO\Flows\OdlDto.cs" />
     <Compile Include="DTO\PageResponseDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\Flows\AddOdlRequest.cs" />
     <Compile Include="Requests\Flows\TakeInChargeRequest.cs" />
     <Compile Include="Requests\OrderingField.cs" />
     <Compile Include="Requests\PagedRequestBase.cs" />
     <Compile Include="Requests\RequestBase.cs" />
+    <Compile Include="Responses\Flows\AddOdlResponse.cs" />
     <Compile Include="Responses\Flows\TakeInChargeResponse.cs" />
     <Compile Include="Responses\PagedResponseBase.cs" />
     <Compile Include="Responses\ResponseBase.cs" />

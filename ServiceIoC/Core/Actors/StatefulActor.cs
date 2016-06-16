@@ -11,18 +11,23 @@ namespace Core.Actors
     [StatePersistence(StatePersistence.Persisted)]
     public abstract class StatefulActor<TState> : Actor
     {
+        protected readonly IActorFactory ActorFactory;
+        protected readonly IServiceFactory ServiceFactory;
 
-        public StatefulActor() : this(null)
+        public StatefulActor() : this(null,null,null)
         {
 
         }
 
-        public StatefulActor(IActorStateManager stateManager) : base()
+        public StatefulActor(IActorStateManager stateManager, 
+            IActorFactory actorFactory,IServiceFactory serviceFactory) : base()
         {
             _stateManager = stateManager;
+            ActorFactory = actorFactory ?? new ReliableFactory();
+            ServiceFactory = serviceFactory ?? new ReliableFactory();
         }
 
-        private IActorStateManager _stateManager;
+        private readonly IActorStateManager _stateManager;
 
         public new IActorStateManager StateManager
         {
@@ -33,20 +38,14 @@ namespace Core.Actors
             }
         }
 
-        protected virtual string StateName
-        {
-            get
-            {
-                return typeof(TState).Name;
-            }
-        }
+        protected virtual string StateName => typeof(TState).Name;
 
         protected internal async Task<TState> GetStateAsync()
         {
             return await this.StateManager.GetOrAddStateAsync(this.StateName, await this.InitializeState());
         }
 
-        internal  async Task SetStateAsync(TState state)
+        protected internal async Task SetStateAsync(TState state)
         {
             await this.StateManager.AddOrUpdateStateAsync(this.StateName, state, (n, a) => state);
         }

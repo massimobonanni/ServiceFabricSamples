@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AffidoActor.Interfaces;
+using Core.Infos;
 using Core.Infrastructure;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
@@ -20,6 +21,7 @@ namespace WebApi.Controllers
         {
             this.ActorFactory = actorFactory;
         }
+
 
 
         [Route("api/customers/{idCustomer}/flows/{idFlow}/takeincharge/{idOdl}")]
@@ -42,7 +44,26 @@ namespace WebApi.Controllers
             return response;
         }
 
-        // Implementazioni delle action
+        [Route("api/customers/{idCustomer}/flows/{idFlow}/Odls")]
+        [HttpPost]
+        public async Task<AddOdlResponse> AddOdl([FromUri] string idCustomer,
+            [FromUri] string idFlow, [FromBody] AddOdlRequest request)
+        {
+            if (String.Compare(idCustomer, "EQT", StringComparison.OrdinalIgnoreCase) != 0)
+                ThrowHttpResponseException(System.Net.HttpStatusCode.NotFound,
+                    "Customer inesistente");
+
+            var actor = ActorFactory.Create<IAffidoActor>(new ActorId(idFlow),
+                           new System.Uri("fabric:/ServiceIoC/AffidoActorService"));
+
+            var odl = new OdlInfo() {Id = request.Data.Id};
+
+            var result = await actor.AddOdl(odl);
+
+            var response = new AddOdlResponse() { IsSuccess = result };
+
+            return response;
+        }
     }
 }
 

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Actors;
-using Microsoft.ServiceFabric.Actors.Runtime;
-using Microsoft.ServiceFabric.Actors.Client;
-using AffidoActor.Interfaces;
 using Core.Actors;
 using Core.Infos;
 using Core.Infrastructure;
+using Microsoft.ServiceFabric.Actors;
+using Microsoft.ServiceFabric.Actors.Runtime;
+using Microsoft.ServiceFabric.Actors.Client;
 using OdlActor.Interfaces;
 
-namespace AffidoActor
+namespace OdlActor
 {
     /// <remarks>
     /// This class represents an actor.
@@ -23,43 +22,15 @@ namespace AffidoActor
     ///  - None: State is kept in memory only and not replicated.
     /// </remarks>
     [StatePersistence(StatePersistence.Persisted)]
-    internal class AffidoActor : StatefulActor<AffidoState>, IAffidoActor
+    internal class OdlActor : StatefulActor<OdlInfo>, IOdlActor
     {
-        public AffidoActor() : base()
+        public OdlActor() : base()
         {
         }
 
-        public AffidoActor(IActorStateManager stateManager,
+        public OdlActor(IActorStateManager stateManager,
             IActorFactory actorFactory, IServiceFactory serviceFactory) : base(stateManager, actorFactory, serviceFactory)
         {
-        }
-
-        public async Task<bool> TakeInCharge(string idOdl)
-        {
-            ActorEventSource.Current.ActorMessage(this, $"{Id} - TakeInCharge({idOdl})");
-            var state = await this.GetStateAsync();
-            var odl = state.OdlList?.FirstOrDefault(o => o.Id == idOdl);
-            if (odl == null) return false;
-
-            var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl));
-            return await actor.TakeInCharge();
-        }
-
-        public async Task<bool> AddOdl(OdlInfo odl)
-        {
-            if (odl == null) return false;
-            ActorEventSource.Current.ActorMessage(this, $"{Id} - TakeInCharge({odl.Id })");
-            var state = await this.GetStateAsync();
-            if (state.OdlList == null) state.OdlList = new List<OdlInfo>();
-            if (state.OdlList.Any(a => a.Id == odl.Id)) return false;
-            state.OdlList.Add(odl);
-            await this.SetStateAsync(state);
-            return true;
-        }
-
-        protected override Task<AffidoState> InitializeState()
-        {
-            return Task.FromResult(new AffidoState() { });
         }
 
         /// <summary>
@@ -77,6 +48,26 @@ namespace AffidoActor
             return Task.Delay(0);
         }
 
+        async Task<bool> IOdlActor.TakeInCharge()
+        {
+            var state = await this.GetStateAsync();
+            if (state.Status == OdlState.Initial)
+            {
+                state.Status = OdlState.InCharge;
+                await this.SetStateAsync(state);
+                return true;
+            }
+            return false;
+        }
 
+
+        protected override Task<OdlInfo> InitializeState()
+        {
+            return Task.FromResult(new OdlInfo()
+            {
+                Id = this.Id.ToString(),
+                Status = OdlState.Initial
+            });
+        }
     }
 }

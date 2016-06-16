@@ -5,7 +5,13 @@
       <Parameter Name="AffidoActorService_PartitionCount" DefaultValue="10" />
       <Parameter Name="AffidoActorService_MinReplicaSetSize" DefaultValue="2" />
       <Parameter Name="AffidoActorService_TargetReplicaSetSize" DefaultValue="3" />
+      <Parameter Name="OdlActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="OdlActorService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="OdlActorService_TargetReplicaSetSize" DefaultValue="3" />
    </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="OdlActorPkg" ServiceManifestVersion="1.0.0" />
+   </ServiceManifestImport>
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="AffidoActorPkg" ServiceManifestVersion="1.0.0" />
    </ServiceManifestImport>
@@ -22,6 +28,11 @@
       <Service Name="AffidoActorService" GeneratedIdRef="4b4e2807-9e68-4f69-9017-1dfeecb9bfe5|Persisted">
          <StatefulService ServiceTypeName="AffidoActorServiceType" TargetReplicaSetSize="[AffidoActorService_TargetReplicaSetSize]" MinReplicaSetSize="[AffidoActorService_MinReplicaSetSize]">
             <UniformInt64Partition PartitionCount="[AffidoActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+      <Service Name="OdlActorService" GeneratedIdRef="78df6a7b-eeae-40c0-9d79-0abc9623fc7c|Persisted">
+         <StatefulService ServiceTypeName="OdlActorServiceType" TargetReplicaSetSize="[OdlActorService_TargetReplicaSetSize]" MinReplicaSetSize="[OdlActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[OdlActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
          </StatefulService>
       </Service>
    </DefaultServices>

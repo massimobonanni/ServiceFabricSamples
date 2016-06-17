@@ -15,7 +15,7 @@ namespace Test
     public class AffidoActorTest
     {
         [TestMethod]
-        public void TakeInCharge_ReturnFalseIsODLIsNotInAffido()
+        public void TakeInCharge_ReturnFalseIfODLIsNotInAffido()
         {
             var idOdl = "333";
 
@@ -37,7 +37,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void TakeInCharge_ReturnTrueIsODLIsInAffidoAndOdlIsInitialState()
+        public void TakeInCharge_ReturnTrueIfODLIsInAffidoAndOdlIsInitialState()
         {
             var idOdl = "333";
 

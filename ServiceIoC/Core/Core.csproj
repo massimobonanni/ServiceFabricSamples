@@ -84,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Actors\Actor.cd" />
     <None Include="Infrastructure\ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>

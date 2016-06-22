@@ -14,17 +14,19 @@ namespace Core.Actors
         protected readonly IActorFactory ActorFactory;
         protected readonly IServiceFactory ServiceFactory;
 
-        public StatefulActor() : this(null,null,null)
+        public StatefulActor() : this(null, null, null)
         {
 
         }
 
-        public StatefulActor(IActorStateManager stateManager, 
-            IActorFactory actorFactory,IServiceFactory serviceFactory) : base()
+        public StatefulActor(IActorStateManager stateManager,
+            IActorFactory actorFactory, IServiceFactory serviceFactory) : base()
         {
             _stateManager = stateManager;
-            ActorFactory = actorFactory ?? new ReliableFactory();
-            ServiceFactory = serviceFactory ?? new ReliableFactory();
+            var reliableFactory = actorFactory == null || serviceFactory == null ?
+                new ReliableFactory() : null;
+            ActorFactory = actorFactory ?? reliableFactory;
+            ServiceFactory = serviceFactory ?? reliableFactory;
         }
 
         private readonly IActorStateManager _stateManager;

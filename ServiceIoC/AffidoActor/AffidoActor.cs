@@ -42,6 +42,7 @@ namespace AffidoActor
             if (odl == null) return false;
 
             var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl));
+
             return await actor.TakeInCharge();
         }
 

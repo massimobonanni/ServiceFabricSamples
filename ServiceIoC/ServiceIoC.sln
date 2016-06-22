@@ -29,6 +29,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdlActor", "OdlActor\OdlAct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdlActor.Interfaces", "OdlActor.Interfaces\OdlActor.Interfaces.csproj", "{FA093C32-7E7F-451D-9835-92B50DF05A7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagraficaService", "AnagraficaService\AnagraficaService.csproj", "{75815A2D-536C-4795-852A-49E2BD53521D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D76BC563-A0AE-48EB-AB71-CDD586D37958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagraficaService.Interfaces", "AnagraficaService.Interfaces\AnagraficaService.Interfaces.csproj", "{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagraficaService.Test", "AnagraficaService.Test\AnagraficaService.Test.csproj", "{3C27995C-748C-4BEA-A87B-E05FCACB980E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +123,28 @@ Global
 		{FA093C32-7E7F-451D-9835-92B50DF05A7F}.Release|Any CPU.ActiveCfg = Release|x64
 		{FA093C32-7E7F-451D-9835-92B50DF05A7F}.Release|x64.ActiveCfg = Release|x64
 		{FA093C32-7E7F-451D-9835-92B50DF05A7F}.Release|x64.Build.0 = Release|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Debug|x64.ActiveCfg = Debug|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Debug|x64.Build.0 = Debug|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Release|Any CPU.ActiveCfg = Release|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Release|x64.ActiveCfg = Release|x64
+		{75815A2D-536C-4795-852A-49E2BD53521D}.Release|x64.Build.0 = Release|x64
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Debug|x64.Build.0 = Debug|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Release|x64.ActiveCfg = Release|Any CPU
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844}.Release|x64.Build.0 = Release|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Debug|x64.Build.0 = Debug|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,9 +158,12 @@ Global
 		{1F437A71-FDC8-4B76-BDF6-06DD34449E82} = {A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}
 		{BD89439E-D0C7-40F2-B279-9276353C0C75} = {A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}
 		{FA093C32-7E7F-451D-9835-92B50DF05A7F} = {A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}
+		{75815A2D-536C-4795-852A-49E2BD53521D} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
+		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
+		{3C27995C-748C-4BEA-A87B-E05FCACB980E} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://mabonann.visualstudio.com/
 		SccLocalPath0 = .
@@ -175,5 +208,17 @@ Global
 		SccProjectTopLevelParentUniqueName11 = ServiceIoC.sln
 		SccProjectName11 = OdlActor.Interfaces
 		SccLocalPath11 = OdlActor.Interfaces
+		SccProjectUniqueName12 = AnagraficaService\\AnagraficaService.csproj
+		SccProjectTopLevelParentUniqueName12 = ServiceIoC.sln
+		SccProjectName12 = AnagraficaService
+		SccLocalPath12 = AnagraficaService
+		SccProjectUniqueName13 = AnagraficaService.Interfaces\\AnagraficaService.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName13 = ServiceIoC.sln
+		SccProjectName13 = AnagraficaService.Interfaces
+		SccLocalPath13 = AnagraficaService.Interfaces
+		SccProjectUniqueName14 = AnagraficaService.Test\\AnagraficaService.Test.csproj
+		SccProjectTopLevelParentUniqueName14 = ServiceIoC.sln
+		SccProjectName14 = AnagraficaService.Test
+		SccLocalPath14 = AnagraficaService.Test
 	EndGlobalSection
 EndGlobal

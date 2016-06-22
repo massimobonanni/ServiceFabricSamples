@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceIoCType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Parameters>
+      <Parameter Name="AnagraficaService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="AnagraficaService_PartitionCount" DefaultValue="1" />
+      <Parameter Name="AnagraficaService_TargetReplicaSetSize" DefaultValue="3" />
       <Parameter Name="WebApi_InstanceCount" DefaultValue="-1" />
       <Parameter Name="AffidoActorService_PartitionCount" DefaultValue="10" />
       <Parameter Name="AffidoActorService_MinReplicaSetSize" DefaultValue="2" />
@@ -9,6 +12,10 @@
       <Parameter Name="OdlActorService_MinReplicaSetSize" DefaultValue="2" />
       <Parameter Name="OdlActorService_TargetReplicaSetSize" DefaultValue="3" />
    </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="AnagraficaServicePkg" ServiceManifestVersion="1.0.0" />
+      <ConfigOverrides />
+   </ServiceManifestImport>
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="OdlActorPkg" ServiceManifestVersion="1.0.0" />
    </ServiceManifestImport>
@@ -20,6 +27,11 @@
       <ConfigOverrides />
    </ServiceManifestImport>
    <DefaultServices>
+      <Service Name="AnagraficaService">
+         <StatefulService ServiceTypeName="AnagraficaServiceType" TargetReplicaSetSize="[AnagraficaService_TargetReplicaSetSize]" MinReplicaSetSize="[AnagraficaService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[AnagraficaService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
       <Service Name="WebApi">
          <StatelessService ServiceTypeName="WebApiType" InstanceCount="[WebApi_InstanceCount]">
             <SingletonPartition />

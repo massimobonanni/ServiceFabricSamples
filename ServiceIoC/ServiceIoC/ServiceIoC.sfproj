@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AffidoActor\AffidoActor.csproj" />
+    <ProjectReference Include="..\AnagraficaService\AnagraficaService.csproj" />
     <ProjectReference Include="..\OdlActor\OdlActor.csproj" />
     <ProjectReference Include="..\WebApi\WebApi.csproj" />
   </ItemGroup>

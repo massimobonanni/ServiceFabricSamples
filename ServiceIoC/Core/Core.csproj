@@ -89,6 +89,7 @@
     <None Include="Actors\Actor.cd" />
     <None Include="Infrastructure\ClassDiagram.cd" />
     <None Include="packages.config" />
+    <None Include="Services\reliableService.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ServiceFabric.Actors.2.0.217\build\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors.2.0.217\build\Microsoft.ServiceFabric.Actors.targets')" />

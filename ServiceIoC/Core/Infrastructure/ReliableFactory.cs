@@ -27,26 +27,27 @@ namespace Core.Infrastructure
         {
             return ActorProxy.Create<TActorInterface>(actorId, applicationName, serviceName, listenerName);
         }
+
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri);
         }
 
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-          ServicePartitionKey partitionKey)
+            ServicePartitionKey partitionKey)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey);
         }
 
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-          ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector)
+            ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey, targetReplicaSelector);
         }
 
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-          ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector,
-          string listenerName)
+              ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector,
+              string listenerName)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey, targetReplicaSelector, listenerName);
         }

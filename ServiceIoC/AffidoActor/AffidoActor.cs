@@ -41,7 +41,7 @@ namespace AffidoActor
             var odl = state.OdlList?.FirstOrDefault(o => o.Id == idOdl);
             if (odl == null) return false;
 
-            var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl));
+            var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl), serviceName: "fabric:/ServiceIoC/AffidoActor");
 
             return await actor.TakeInCharge();
         }

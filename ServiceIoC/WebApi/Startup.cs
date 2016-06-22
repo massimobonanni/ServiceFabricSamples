@@ -32,6 +32,7 @@ namespace WebApi
             ConfigureAutofac(appBuilder,config);
             ConfigureUnity(appBuilder, config);
 
+            appBuilder.Use(typeof(MyOwinComponent));
             appBuilder.UseWebApi(config);
         }
 

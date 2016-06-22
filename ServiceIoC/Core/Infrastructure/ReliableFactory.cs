@@ -11,36 +11,15 @@ namespace Core.Infrastructure
     public class ReliableFactory : IActorFactory, IServiceFactory
     {
         TActorInterface IActorFactory.Create<TActorInterface>(string actorId,
-           Uri serviceUri, string listenerName)
+           Uri serviceUri, string listenerName )
         {
             return ActorProxy.Create<TActorInterface>(new ActorId(actorId), serviceUri, listenerName);
-        }
-
-        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, Uri serviceUri)
-        {
-            return ActorProxy.Create<TActorInterface>(actorId, serviceUri);
         }
 
         TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, Uri serviceUri,
            string listenerName)
         {
             return ActorProxy.Create<TActorInterface>(actorId, serviceUri, listenerName);
-        }
-
-        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId)
-        {
-            return ActorProxy.Create<TActorInterface>(actorId);
-        }
-
-        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName)
-        {
-            return ActorProxy.Create<TActorInterface>(actorId, applicationName);
-        }
-
-        TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName,
-           string serviceName)
-        {
-            return ActorProxy.Create<TActorInterface>(actorId, applicationName, serviceName);
         }
 
         TActorInterface IActorFactory.Create<TActorInterface>(ActorId actorId, string applicationName,
@@ -54,13 +33,13 @@ namespace Core.Infrastructure
         }
 
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-          ServicePartitionKey partitionKey )
+          ServicePartitionKey partitionKey)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey);
         }
 
         TServiceInterface IServiceFactory.Create<TServiceInterface>(Uri serviceUri,
-          ServicePartitionKey partitionKey , TargetReplicaSelector targetReplicaSelector)
+          ServicePartitionKey partitionKey, TargetReplicaSelector targetReplicaSelector)
         {
             return ServiceProxy.Create<TServiceInterface>(serviceUri, partitionKey, targetReplicaSelector);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Infrastructure;
+using Microsoft.ServiceFabric.Actors;
 
 namespace Core.Actors
 {
@@ -20,9 +21,11 @@ namespace Core.Actors
         }
 
         public StatefulActor(IActorStateManager stateManager,
-            IActorFactory actorFactory, IServiceFactory serviceFactory) : base()
+            IActorFactory actorFactory, IServiceFactory serviceFactory,
+            ActorId actorId = null) : base()
         {
             _stateManager = stateManager;
+            _id = actorId;
             var reliableFactory = actorFactory == null || serviceFactory == null ?
                 new ReliableFactory() : null;
             ActorFactory = actorFactory ?? reliableFactory;
@@ -40,6 +43,18 @@ namespace Core.Actors
             }
         }
 
+
+        private readonly ActorId _id;
+
+        public new ActorId Id
+        {
+            get
+            {
+                if (_id != null) return _id;
+                return base.Id;
+            }
+        }
+
         protected virtual string StateName => typeof(TState).Name;
 
         protected internal async Task<TState> GetStateAsync()
@@ -53,6 +68,7 @@ namespace Core.Actors
         }
 
         protected abstract Task<TState> InitializeState();
+
 
     }
 }

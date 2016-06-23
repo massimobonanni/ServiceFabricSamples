@@ -28,7 +28,7 @@ namespace Test
                 new Core.Infos.OdlInfo() {Id = "222"}
             };
 
-            var target = new AffidoActor.AffidoActor(stateManager, null, null);
+            var target = new AffidoActor.AffidoActor(stateManager, null, null, new ActorId("TestActor"));
             target.SetStateAsync(stato).GetAwaiter().GetResult();
 
             var actual = target.TakeInCharge(idOdl).Result;

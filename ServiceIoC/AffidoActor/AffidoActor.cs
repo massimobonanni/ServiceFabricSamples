@@ -30,13 +30,16 @@ namespace AffidoActor
         }
 
         public AffidoActor(IActorStateManager stateManager,
-            IActorFactory actorFactory, IServiceFactory serviceFactory) : base(stateManager, actorFactory, serviceFactory)
+            IActorFactory actorFactory, IServiceFactory serviceFactory,
+            ActorId actorId = null) : base(stateManager, actorFactory, serviceFactory, actorId)
         {
         }
 
         public async Task<bool> TakeInCharge(string idOdl)
         {
             ActorEventSource.Current.ActorMessage(this, $"{Id} - TakeInCharge({idOdl})");
+
+            var id = this.Id;
             var state = await this.GetStateAsync();
             var odl = state.OdlList?.FirstOrDefault(o => o.Id == idOdl);
             if (odl == null) return false;

@@ -31,7 +31,8 @@ namespace AffidoActor
 
         public AffidoActor(IActorStateManager stateManager,
             IActorFactory actorFactory, IServiceFactory serviceFactory,
-            ActorId actorId = null) : base(stateManager, actorFactory, serviceFactory, actorId)
+            ActorId actorId = null, Uri serviceUri = null) :
+            base(stateManager, actorFactory, serviceFactory, actorId, serviceUri)
         {
         }
 

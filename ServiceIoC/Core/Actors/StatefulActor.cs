@@ -22,10 +22,11 @@ namespace Core.Actors
 
         public StatefulActor(IActorStateManager stateManager,
             IActorFactory actorFactory, IServiceFactory serviceFactory,
-            ActorId actorId = null) : base()
+            ActorId actorId = null, Uri serviceUri = null) : base()
         {
             _stateManager = stateManager;
             _id = actorId;
+            _serviceUri = serviceUri;
             var reliableFactory = actorFactory == null || serviceFactory == null ?
                 new ReliableFactory() : null;
             ActorFactory = actorFactory ?? reliableFactory;
@@ -52,6 +53,17 @@ namespace Core.Actors
             {
                 if (_id != null) return _id;
                 return base.Id;
+            }
+        }
+
+        private readonly Uri _serviceUri;
+
+        public new Uri ServiceUri
+        {
+            get
+            {
+                if (_serviceUri != null) return _serviceUri;
+                return base.ServiceUri;
             }
         }
 

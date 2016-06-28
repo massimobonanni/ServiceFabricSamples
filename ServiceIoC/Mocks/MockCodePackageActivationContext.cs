@@ -3,6 +3,8 @@
 //  Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
+using System.Fabric.Health;
+
 namespace Mocks
 {
     using System;
@@ -46,6 +48,11 @@ namespace Mocks
         public string TempDirectory
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public void ReportDeployedServicePackageHealth(HealthInformation healthInfo)
+        {
+            throw new NotImplementedException();
         }
 
         public string WorkDirectory
@@ -132,6 +139,16 @@ namespace Mocks
         }
 
         public string GetServiceManifestVersion()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReportApplicationHealth(HealthInformation healthInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReportDeployedApplicationHealth(HealthInformation healthInfo)
         {
             throw new NotImplementedException();
         }

@@ -35,6 +35,12 @@ namespace Mocks
             return Task.Delay(0, cancellationToken);
         }
 
+        public Task ClearCacheAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            this.store.Clear();
+            return Task.Delay(0, cancellationToken);
+        }
+
         public Task<bool> ContainsStateAsync(string stateName, CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.FromResult(store.ContainsKey(stateName));

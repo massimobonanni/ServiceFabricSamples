@@ -45,7 +45,7 @@ namespace Test
             var actorFactory = MockRepository.GenerateStub<IActorFactory>();
             var actor = MockRepository.GenerateStub<IOdlActor>();
 
-            actorFactory.Stub(x => x.Create<IOdlActor>(new ActorId(idOdl), serviceName: "fabric:/ServiceIoC/AffidoActor")).Return(actor);
+            actorFactory.Stub(x => x.Create<IOdlActor>(new ActorId(idOdl), serviceName: "fabric:/ServiceIoC/OdlActorService")).Return(actor);
             actor.Stub(x => x.TakeInCharge()).Return(Task.FromResult(true));
 
 

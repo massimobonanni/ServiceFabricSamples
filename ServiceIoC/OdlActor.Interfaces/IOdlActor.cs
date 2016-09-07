@@ -13,7 +13,7 @@ namespace OdlActor.Interfaces
     /// </summary>
     public interface IOdlActor : IActor
     {
-        Task<bool> TakeInCharge();
+        Task<bool> TakeInCharge( );
 
     }
 }

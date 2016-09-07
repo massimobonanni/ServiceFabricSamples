@@ -81,6 +81,14 @@ namespace Core.Actors
 
         protected abstract Task<TState> InitializeState();
 
+        public TState State
+        {
+            get
+            {
+                return this.StateManager.GetOrAddStateAsync<TState>(this.StateName, this.InitializeState().Result).Result;
+            }
+        }
+
 
     }
 }

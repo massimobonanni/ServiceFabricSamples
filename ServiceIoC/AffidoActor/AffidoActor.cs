@@ -45,7 +45,14 @@ namespace AffidoActor
             var odl = state.OdlList?.FirstOrDefault(o => o.Id == idOdl);
             if (odl == null) return false;
 
-            var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl), serviceName: "fabric:/ServiceIoC/AffidoActor");
+            var actor = ActorFactory.Create<IOdlActor>(new ActorId(idOdl), serviceName: "fabric:/ServiceIoC/OdlActorService");
+
+            var propBag = new Dictionary<string, object>()
+            {
+                { "intero", 1 },
+                { "stringa", "prova" },
+                { "data", DateTime.Now }
+            };
 
             return await actor.TakeInCharge();
         }
@@ -59,7 +66,11 @@ namespace AffidoActor
             if (state.OdlList.Any(a => a.Id == odl.Id)) return false;
             state.OdlList.Add(odl);
             await this.SetStateAsync(state);
-            return true;
+            //if (this.State.OdlList == null) this.State.OdlList = new List<OdlInfo>();
+            //this.State.OdlList.Add(odl);
+
+            if (this.State.OdlList.Count() == 4) throw new Exception();
+            return await Task.FromResult(true);
         }
 
         protected override Task<AffidoState> InitializeState()

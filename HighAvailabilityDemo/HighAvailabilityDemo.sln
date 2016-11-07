@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "HighAvailabilityDemo", "HighAvailabilityDemo\HighAvailabilityDemo.sfproj", "{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SequenceActor", "SequenceActor\SequenceActor.csproj", "{496029C9-4119-4325-94B5-867ADA868339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SequenceActor.Interfaces", "SequenceActor.Interfaces\SequenceActor.Interfaces.csproj", "{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{2A785D44-0B3A-45EE-9B4D-F265D94968F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Debug|x64.ActiveCfg = Debug|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Debug|x64.Build.0 = Debug|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Debug|x64.Deploy.0 = Debug|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Release|Any CPU.ActiveCfg = Release|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Release|x64.ActiveCfg = Release|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Release|x64.Build.0 = Release|x64
+		{236A3BE7-CC2A-489D-BB83-1F0CF9630B0F}.Release|x64.Deploy.0 = Release|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Debug|x64.ActiveCfg = Debug|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Debug|x64.Build.0 = Debug|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Release|Any CPU.ActiveCfg = Release|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Release|x64.ActiveCfg = Release|x64
+		{496029C9-4119-4325-94B5-867ADA868339}.Release|x64.Build.0 = Release|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Debug|x64.ActiveCfg = Debug|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Debug|x64.Build.0 = Debug|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Release|Any CPU.ActiveCfg = Release|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Release|x64.ActiveCfg = Release|x64
+		{E5701F6E-23D2-466B-A0FF-AF2B8AF6B5D6}.Release|x64.Build.0 = Release|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Debug|x64.ActiveCfg = Debug|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Debug|x64.Build.0 = Debug|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Release|Any CPU.ActiveCfg = Release|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Release|x64.ActiveCfg = Release|x64
+		{77F2FDEF-2169-4EE8-8175-51892BDD1BB0}.Release|x64.Build.0 = Release|x64
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{2A785D44-0B3A-45EE-9B4D-F265D94968F9}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://mabonann.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HighAvailabilityDemo\\HighAvailabilityDemo.sfproj
+		SccProjectName1 = HighAvailabilityDemo
+		SccLocalPath1 = HighAvailabilityDemo
+		SccProjectUniqueName2 = SequenceActor.Interfaces\\SequenceActor.Interfaces.csproj
+		SccProjectName2 = SequenceActor.Interfaces
+		SccLocalPath2 = SequenceActor.Interfaces
+		SccProjectUniqueName3 = SequenceActor\\SequenceActor.csproj
+		SccProjectName3 = SequenceActor
+		SccLocalPath3 = SequenceActor
+		SccProjectUniqueName4 = TestConsole\\TestConsole.csproj
+		SccProjectName4 = TestConsole
+		SccLocalPath4 = TestConsole
+		SccProjectUniqueName5 = WebApi\\WebApi.csproj
+		SccProjectName5 = WebApi
+		SccLocalPath5 = WebApi
+	EndGlobalSection
+EndGlobal

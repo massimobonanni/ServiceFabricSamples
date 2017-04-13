@@ -15,5 +15,7 @@ namespace WebApi.Response.SequenceController
         public string NodeInfo { get; set; }
         [JsonProperty("actorId")]
         public string ActorId { get; set; }
+        [JsonProperty("packageVersion")]
+        public string PackageVersion { get; set; }
     }
 }

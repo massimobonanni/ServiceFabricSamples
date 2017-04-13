@@ -9,5 +9,7 @@ namespace SequenceActor.Interfaces
         public int Value { get; set; }
         [DataMember]
         public string NodeInfo { get; set; }
+        [DataMember]
+        public string PackageVersion { get; set; }
     }
 }

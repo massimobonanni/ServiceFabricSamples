@@ -36,7 +36,7 @@ namespace TestConsole
                 var request = new RestRequest(Method.GET);
                 IRestResponse<GetNextSequenceResponse> response = client.Execute<GetNextSequenceResponse>(request);
 
-                Console.WriteLine($"[{response.Data.ActorId }] - Sequence {response.Data.Value } - Node {response.Data.NodeInfo }");
+                Console.WriteLine($"[{response.Data?.ActorId }] - Sequence {response.Data?.Value } - Node {response.Data?.NodeInfo } - Version {response.Data?.PackageVersion  }");
                 Task.Delay(250).GetAwaiter().GetResult();
             }
         }

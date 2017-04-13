@@ -47,7 +47,8 @@ namespace SequenceActor
             var returnData = new SequenceDto()
             {
                 Value = currentSequence,
-                NodeInfo = this.ActorService.Context.NodeContext.NodeName
+                NodeInfo = this.ActorService.Context.NodeContext.NodeName,
+                PackageVersion = this.ActorService.Context.CodePackageActivationContext.CodePackageVersion
             };
 
             await this.StateManager.SetStateAsync<int>(SequenceStatusKey, ++currentSequence);

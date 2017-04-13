@@ -24,9 +24,9 @@ namespace WebApi.Controllers
             {
                 ActorId = sequenceId,
                 NodeInfo = actorResponse.NodeInfo,
-                Value = actorResponse.Value
+                Value = actorResponse.Value,
+                PackageVersion = actorResponse.PackageVersion
             };
-
 
             return response;
         }

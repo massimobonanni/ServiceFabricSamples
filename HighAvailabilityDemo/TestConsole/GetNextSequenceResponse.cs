@@ -5,5 +5,6 @@
         public int Value { get; set; }
         public string NodeInfo { get; set; }
         public string ActorId { get; set; }
+        public string PackageVersion { get; set; }
     }
 }

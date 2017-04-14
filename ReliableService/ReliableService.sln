@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ReliableService", "ReliableService\ReliableService.sfproj", "{9C062D7B-5967-47EF-A45B-05F3492EA77D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsService", "ProductsService\ProductsService.csproj", "{83665C74-AADB-4E12-82B1-EFCC7712F4A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsService.Interfaces", "ProductsService.Interfaces\ProductsService.Interfaces.csproj", "{8874FED2-CCB7-44B6-9363-163C0B2C3128}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{9C564217-CA81-4698-8F78-A3F8C59BDEB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Debug|x64.ActiveCfg = Debug|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Debug|x64.Build.0 = Debug|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Debug|x64.Deploy.0 = Debug|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Release|Any CPU.ActiveCfg = Release|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Release|x64.ActiveCfg = Release|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Release|x64.Build.0 = Release|x64
+		{9C062D7B-5967-47EF-A45B-05F3492EA77D}.Release|x64.Deploy.0 = Release|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Debug|x64.ActiveCfg = Debug|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Debug|x64.Build.0 = Debug|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Release|Any CPU.ActiveCfg = Release|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Release|x64.ActiveCfg = Release|x64
+		{83665C74-AADB-4E12-82B1-EFCC7712F4A4}.Release|x64.Build.0 = Release|x64
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Debug|x64.Build.0 = Debug|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Release|x64.ActiveCfg = Release|Any CPU
+		{8874FED2-CCB7-44B6-9363-163C0B2C3128}.Release|x64.Build.0 = Release|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Debug|x64.Build.0 = Debug|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|x64.ActiveCfg = Release|Any CPU
+		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://mabonann.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConsoleApplication\\ConsoleApplication.csproj
+		SccProjectName1 = ConsoleApplication
+		SccLocalPath1 = ConsoleApplication
+		SccProjectUniqueName2 = ProductsService.Interfaces\\ProductsService.Interfaces.csproj
+		SccProjectName2 = ProductsService.Interfaces
+		SccLocalPath2 = ProductsService.Interfaces
+		SccProjectUniqueName3 = ProductsService\\ProductsService.csproj
+		SccProjectName3 = ProductsService
+		SccLocalPath3 = ProductsService
+		SccProjectUniqueName4 = ReliableService\\ReliableService.sfproj
+		SccProjectName4 = ReliableService
+		SccLocalPath4 = ReliableService
+	EndGlobalSection
+EndGlobal

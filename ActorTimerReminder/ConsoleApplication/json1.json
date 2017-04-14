@@ -1,0 +1,139 @@
+﻿{
+  "Timestamp": "2016-06-23T15:46:14.4012805+02:00",
+  "ProviderName": "Microsoft-ServiceFabric-Actors",
+  "Id": 8,
+  "Message": "Actor method has completed. Method name: IMyActor.GetCountAsync, actor type: MyActor.MyActor, actor ID: test.",
+  "ProcessId": 19068,
+  "Level": "Verbose",
+  "Keywords": "0x0000F00000000002",
+  "EventName": "ActorMethod/Stop",
+  "Payload": {
+    "methodExecutionTimeTicks": 1278419,
+    "methodName": "IMyActor.GetCountAsync",
+    "methodSignature": "System.Threading.Tasks.Task`1[System.Int32] GetCountAsync()",
+    "actorType": "MyActor.MyActor",
+    "actorId": "test",
+    "actorIdKind": 2,
+    "replicaOrInstanceId": 131111630959323431,
+    "partitionId": "45bf806b-1012-4d5a-af2f-955515af02c7",
+    "serviceName": "fabric:/ActorTimerReminder/MyActorService",
+    "applicationName": "fabric:/ActorTimerReminder",
+    "serviceTypeName": "MyActorServiceType",
+    "applicationTypeName": "ActorTimerReminderType",
+    "nodeName": "_Node_0"
+  }
+}
+
+{
+  "Timestamp": "2016-06-23T15:46:14.2705976+02:00",
+  "ProviderName": "Microsoft-ServiceFabric-Actors",
+  "Id": 7,
+  "Message": "Actor method is being invoked. Method name: IMyActor.GetCountAsync, actor type: MyActor.MyActor, actor ID: test.",
+  "ProcessId": 19068,
+  "Level": "Verbose",
+  "Keywords": "0x0000F00000000002",
+  "EventName": "ActorMethod/Start",
+  "Payload": {
+    "methodName": "IMyActor.GetCountAsync",
+    "methodSignature": "System.Threading.Tasks.Task`1[System.Int32] GetCountAsync()",
+    "actorType": "MyActor.MyActor",
+    "actorId": "test",
+    "actorIdKind": 2,
+    "replicaOrInstanceId": 131111630959323431,
+    "partitionId": "45bf806b-1012-4d5a-af2f-955515af02c7",
+    "serviceName": "fabric:/ActorTimerReminder/MyActorService",
+    "applicationName": "fabric:/ActorTimerReminder",
+    "serviceTypeName": "MyActorServiceType",
+    "applicationTypeName": "ActorTimerReminderType",
+    "nodeName": "_Node_0"
+  }
+}
+
+
+
+
+{
+  "Timestamp": "2016-06-23T15:46:54.3321358+02:00",
+  "ProviderName": "MyCompany-ActorTimerReminder-MyActor",
+  "Id": 2,
+  "Message": " 15:46:54 Increment.",
+  "ProcessId": 19068,
+  "Level": "Informational",
+  "Keywords": "0x0000F00000000000",
+  "EventName": "ActorMessage",
+  "Payload": {
+    "actorType": "MyActor.MyActor",
+    "actorId": "test",
+    "applicationTypeName": "ActorTimerReminderType",
+    "applicationName": "fabric:/ActorTimerReminder",
+    "serviceTypeName": "MyActorServiceType",
+    "serviceName": "fabric:/ActorTimerReminder/MyActorService",
+    "partitionId": "45bf806b-1012-4d5a-af2f-955515af02c7",
+    "replicaOrInstanceId": 131111630959323431,
+    "nodeName": "_Node_0",
+    "message": " 15:46:54 Increment."
+  }
+}
+
+{
+  "Timestamp": "2016-06-23T15:47:14.3942068+02:00",
+  "ProviderName": "Microsoft-ServiceFabric-Actors",
+  "Id": 12,
+  "Message": "Number of actor method calls waiting for the actor lock: 0, actor type: MyActor.MyActor, actor ID: test.",
+  "ProcessId": 19068,
+  "Level": "Verbose",
+  "Keywords": "0x0000F00000000008",
+  "EventName": "ActorMethodCallsWaitingForLock",
+  "Payload": {
+    "countOfWaitingMethodCalls": 0,
+    "actorType": "MyActor.MyActor",
+    "actorId": "test",
+    "actorIdKind": 2,
+    "replicaOrInstanceId": 131111630959323431,
+    "partitionId": "45bf806b-1012-4d5a-af2f-955515af02c7",
+    "serviceName": "fabric:/ActorTimerReminder/MyActorService",
+    "applicationName": "fabric:/ActorTimerReminder",
+    "serviceTypeName": "MyActorServiceType",
+    "applicationTypeName": "ActorTimerReminderType",
+    "nodeName": "_Node_0"
+  }
+}
+
+{
+  "Timestamp": "2016-06-23T15:47:14.394307+02:00",
+  "ProviderName": "Microsoft-ServiceFabric-Actors",
+  "Id": 10,
+  "Message": "Starting to save actor state. Actor type: MyActor.MyActor, actor ID: test.",
+  "ProcessId": 19068,
+  "Level": "Verbose",
+  "Keywords": "0x0000F00000000004",
+  "EventName": "ActorSaveState/Start",
+  "Payload": {
+    "actorType": "MyActor.MyActor",
+    "actorId": "test",
+    "actorIdKind": 2,
+    "replicaOrInstanceId": 131111630959323431,
+    "partitionId": "45bf806b-1012-4d5a-af2f-955515af02c7",
+    "serviceName": "fabric:/ActorTimerReminder/MyActorService",
+    "applicationName": "fabric:/ActorTimerReminder",
+    "serviceTypeName": "MyActorServiceType",
+    "applicationTypeName": "ActorTimerReminderType",
+    "nodeName": "_Node_0"
+  }
+}
+
+{
+  "Timestamp": "2016-06-23T15:45:03.5044571+02:00",
+  "ProviderName": "Microsoft-ServiceFabric-Actors",
+  "Id": 13,
+  "Message": "Actor type MyActor.MyActor registered.",
+  "ProcessId": 7208,
+  "Level": "Informational",
+  "Keywords": "0x0000F00000000001",
+  "EventName": "ActorTypeRegistered",
+  "Payload": {
+    "actorType": "MyActor.MyActor",
+    "customeActorServiceType": "Microsoft.ServiceFabric.Actors.Runtime.ActorService",
+    "nodeName": "_Node_1"
+  }
+}

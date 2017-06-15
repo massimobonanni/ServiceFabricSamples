@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Fabric;
+using System.Fabric.Health;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,5 +57,43 @@ namespace SequenceActor
 
             return returnData;
         }
+
+        #region Health
+        private const string HealtPropertyName = "Sequence";
+
+        private void CheckHealth(int currentSequence)
+        {
+            if (currentSequence % 1000 == 0)
+            {
+                ReportHealthInformation(this.Id.ToString(), HealtPropertyName, "Sequence multiplo di 1000",
+                    HealthState.Error, 60);
+            }
+            else if (currentSequence % 500 == 0)
+            {
+                ReportHealthInformation(this.Id.ToString(), HealtPropertyName, "Sequence multiplo di 500",
+                    HealthState.Warning, 60);
+            }
+            else
+            {
+                //ReportHealthInformation(this.Id.ToString(), "count", "", HealthState.Ok);
+            }
+        }
+
+        protected void ReportHealthInformation(string sourceId, string property, string description, 
+            HealthState state, int secondsToLive)
+        {
+            HealthInformation healthInformation = new HealthInformation(sourceId, property, state);
+            healthInformation.Description = description;
+            if (secondsToLive > 0) healthInformation.TimeToLive = TimeSpan.FromSeconds(secondsToLive);
+            healthInformation.RemoveWhenExpired = true;
+            try
+            {
+                var activationContext = FabricRuntime.GetActivationContext();
+                activationContext.ReportApplicationHealth(healthInformation);
+            }
+            catch { }
+        }
+        #endregion
+
     }
 }

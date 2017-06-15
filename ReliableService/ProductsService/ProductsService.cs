@@ -20,6 +20,8 @@ namespace ProductsService
     {
         private const string ProductListName = "products";
 
+        private IReliableDictionary<string, ProductDto> products;
+
         public ProductsService(StatefulServiceContext context)
             : base(context)
         {
@@ -45,6 +47,8 @@ namespace ProductsService
         /// <param name="cancellationToken">Canceled when Service Fabric needs to shut down this service replica.</param>
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
+            products = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, ProductDto>>(ProductListName);
+
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -53,68 +57,54 @@ namespace ProductsService
             }
         }
 
-        private Int64RangePartitionInformation GetPartitionInfo()
-        {
-            return this.Partition.PartitionInfo as Int64RangePartitionInformation;
-        }
-
-        private string GetProductListStateName()
-        {
-            var pInfo = GetPartitionInfo();
-            return pInfo.LowKey.ToString();
-        }
-
-        private async Task<List<ProductDto>> GetProductListAsync(ITransaction tx)
-        {
-            var productListStateName = GetProductListStateName();
-            var state = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, List<ProductDto>>>(ProductListName);
-            return await state.GetOrAddAsync(tx, productListStateName, a => new List<ProductDto>());
-        }
-
-        private async Task SetProductListAsync(ITransaction tx, List<ProductDto> products)
-        {
-            var productListStateName = GetProductListStateName();
-            var state = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, List<ProductDto>>>(ProductListName);
-            await state.AddOrUpdateAsync(tx, productListStateName, a => products, (a, l) => products);
-        }
 
         public async Task<IEnumerable<ProductDto>> SearchProducts(string searchText)
         {
-            IEnumerable<ProductDto> result = null;
+            List<ProductDto> result = new List<ProductDto>();
+            IAsyncEnumerable<KeyValuePair<string, ProductDto>> productList = null;
             using (var tx = this.StateManager.CreateTransaction())
             {
-                var productList = await GetProductListAsync(tx);
+                productList = await products.CreateEnumerableAsync(tx);
+                var productsEnumerator = productList.GetAsyncEnumerator();
 
-                result = productList;
-                if (searchText != null)
-                    result = result.Where(p => p.Description.ToLower().Contains(searchText.ToLower()));
+                while (await productsEnumerator.MoveNextAsync(default(CancellationToken)))
+                {
+                    var product = productsEnumerator.Current.Value;
+                    if (product.Description.ToLower().Contains(searchText.ToLower()))
+                    {
+                        result.Add(product);
+                    }
+                }
 
                 await tx.CommitAsync();
             }
             return result;
         }
 
+        private async Task<ProductDto> GetProductAsync(string productCode)
+        {
+            ProductDto productDto = null;
+            using (var tx = this.StateManager.CreateTransaction())
+            {
+                var product = await products.TryGetValueAsync(tx, productCode);
+                if (product.HasValue)
+                    productDto = product.Value;
+            }
+            return productDto;
+        }
+
         public async Task<bool> AddProduct(ProductDto product)
         {
             ServiceEventSource.Current.ServiceMessage(this, "AddProduct", product);
 
-            using (var tx = this.StateManager.CreateTransaction())
+            ProductDto productDto = await GetProductAsync(product.Code);
+            if (productDto == null)
             {
-                var productList = await GetProductListAsync(tx);
-                if (productList.Any(p => p.Code == product.Code))
+                using (var tx = this.StateManager.CreateTransaction())
                 {
-                    var localProduct = productList.First(p => p.Code == product.Code);
-                    localProduct.Description = product.Description;
-                    localProduct.StoreUnit += product.StoreUnit;
-                    localProduct.UnitCost = product.UnitCost;
+                    await products.AddAsync(tx, product.Code, product);
+                    await tx.CommitAsync();
                 }
-                else
-                {
-                    productList.Add(product);
-                }
-
-                await SetProductListAsync(tx,productList);
-                await tx.CommitAsync();
             }
             return true;
         }

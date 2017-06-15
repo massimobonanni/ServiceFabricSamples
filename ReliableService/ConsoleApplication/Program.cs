@@ -16,25 +16,9 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            //CreateNewProducts(10000);
+            CreateNewProducts(10000);
 
-            var fabricClient = new FabricClient();
-            ServicePartitionList partitionList = fabricClient.QueryManager.GetPartitionListAsync(new Uri(ServiceNames.ProductsServiceUri)).GetAwaiter().GetResult();
-            var partitionInfos =
-                partitionList.Select(p => p.PartitionInformation).OfType<Int64RangePartitionInformation>();
-
-            var searchTasks = new List<Task<IEnumerable<ProductDto>>>();
-            foreach (var pInfo in partitionInfos)
-            {
-                var client = ServiceProxy.Create<IProductsService>(
-                    new Uri(ServiceNames.ProductsServiceUri),
-                    new ServicePartitionKey(pInfo.LowKey));
-
-                searchTasks.Add(client.SearchProducts("lorem"));
-            }
-            Task.WhenAll(searchTasks).GetAwaiter().GetResult();
-
-            var resultList = searchTasks.SelectMany(a => a.Result);
+            var resultList = ProductsServiceProxy.Instance.SearchProducts("lorem").GetAwaiter().GetResult();
 
             foreach (var item in resultList)
             {
@@ -58,11 +42,7 @@ namespace ConsoleApplication
             foreach (var product in products)
             {
                 Console.WriteLine("[ADD] {0} - {1} - {2}", product.Code, product.Description, product.Category);
-                var proxy = ServiceProxy.Create<IProductsService>(
-                    new Uri(ServiceNames.ProductsServiceUri),
-                    product.CalculatePartitionKey().GetAwaiter().GetResult());
-
-                var result = proxy.AddProduct(product).GetAwaiter().GetResult();
+                var result = ProductsServiceProxy.Instance.AddProduct(product).GetAwaiter().GetResult();
             }
         }
     }

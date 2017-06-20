@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceConfigurationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="MyService_MinReplicaSetSize" DefaultValue="2" />
+    <Parameter Name="MyService_PartitionCount" DefaultValue="1" />
+    <Parameter Name="MyService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MySection_MyParameter" DefaultValue="Application Package Root" />
+    <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="2" />
+    <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyConfigSection_MyParameter" DefaultValue="Application manifest settings" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MyServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="MyConfigSection">
+            <Parameter Name="MyParameter" Value="[MyConfigSection_MyParameter]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MyActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="MySection">
+            <Parameter Name="MyParameter" Value="[MySection_MyParameter]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <DefaultServices>
+    <Service Name="MyService">
+      <StatefulService ServiceTypeName="MyServiceType" TargetReplicaSetSize="[MyService_TargetReplicaSetSize]" MinReplicaSetSize="[MyService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[MyService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="MyActorService" GeneratedIdRef="6c290860-6c68-46dd-b91b-4dd4d282c738|Persisted">
+      <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

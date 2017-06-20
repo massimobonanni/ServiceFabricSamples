@@ -47,7 +47,7 @@ namespace ProductsService
         /// <param name="cancellationToken">Canceled when Service Fabric needs to shut down this service replica.</param>
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
-            products = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, ProductDto>>(ProductListName);
+            await EnsureProductList();
 
             while (true)
             {
@@ -57,9 +57,15 @@ namespace ProductsService
             }
         }
 
+        private async Task EnsureProductList()
+        {
+            if (products == null)
+                products = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, ProductDto>>(ProductListName);
+        }
 
         public async Task<IEnumerable<ProductDto>> SearchProducts(string searchText)
         {
+            await EnsureProductList();
             List<ProductDto> result = new List<ProductDto>();
             IAsyncEnumerable<KeyValuePair<string, ProductDto>> productList = null;
             using (var tx = this.StateManager.CreateTransaction())
@@ -70,7 +76,11 @@ namespace ProductsService
                 while (await productsEnumerator.MoveNextAsync(default(CancellationToken)))
                 {
                     var product = productsEnumerator.Current.Value;
-                    if (product.Description.ToLower().Contains(searchText.ToLower()))
+                    if (searchText == null)
+                    {
+                        result.Add(product);
+                    }
+                    else if (product.Description.ToLower().Contains(searchText.ToLower()))
                     {
                         result.Add(product);
                     }
@@ -95,6 +105,7 @@ namespace ProductsService
 
         public async Task<bool> AddProduct(ProductDto product)
         {
+            await EnsureProductList();
             ServiceEventSource.Current.ServiceMessage(this, "AddProduct", product);
 
             ProductDto productDto = await GetProductAsync(product.Code);

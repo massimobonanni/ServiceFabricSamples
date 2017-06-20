@@ -51,13 +51,21 @@ namespace ProductsService.Interfaces
         {
             await EnsurePartitionCount();
             var categoryValues = Enum.GetValues(typeof(ProductCategory)).Cast<int>();
-            var partitionIndex = ((int)product.Category - categoryValues.Min()) * partitionInfoList.Count / categoryValues.Count() + 1;
-            return new ServicePartitionKey(partitionIndex);
+            ServicePartitionKey partitionKey = null;
+            foreach (var partition in partitionInfoList)
+            {
+                if ((int)product.Category >= partition.LowKey && (int)product.Category <= partition.HighKey)
+                {
+                    partitionKey = new ServicePartitionKey(partition.LowKey);
+                    break;
+                }
+            }
+            return partitionKey;
         }
 
         private async Task<IProductsService> CreateServiceProxy(ProductDto product)
         {
-            var partitionKey = await product.CalculatePartitionKey();
+            var partitionKey = await CalculatePartitionKey(product);
             return ServiceProxy.Create<IProductsService>(serviceUri, partitionKey);
         }
 
@@ -71,7 +79,7 @@ namespace ProductsService.Interfaces
                 var proxy = ServiceProxy.Create<IProductsService>(serviceUri, srvPartitionKey);
                 taskList.Add(proxy.SearchProducts(searchText));
             }
-            await Task.WhenAll(taskList.ToArray());
+            await Task.WhenAll(taskList);
 
             var result = taskList.SelectMany(t => t.Result).ToList();
             return result;

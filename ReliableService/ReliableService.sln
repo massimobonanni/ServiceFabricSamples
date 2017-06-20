@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsService.Interfaces"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{9C564217-CA81-4698-8F78-A3F8C59BDEB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{A9B2D795-3512-4B0C-996E-E01D945AE8B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,26 +51,14 @@ Global
 		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|x64.ActiveCfg = Release|Any CPU
 		{9C564217-CA81-4698-8F78-A3F8C59BDEB6}.Release|x64.Build.0 = Release|Any CPU
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Debug|x64.ActiveCfg = Debug|x64
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Debug|x64.Build.0 = Debug|x64
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Release|Any CPU.ActiveCfg = Release|x64
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Release|x64.ActiveCfg = Release|x64
+		{A9B2D795-3512-4B0C-996E-E01D945AE8B9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mabonann.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ConsoleApplication\\ConsoleApplication.csproj
-		SccProjectName1 = ConsoleApplication
-		SccLocalPath1 = ConsoleApplication
-		SccProjectUniqueName2 = ProductsService.Interfaces\\ProductsService.Interfaces.csproj
-		SccProjectName2 = ProductsService.Interfaces
-		SccLocalPath2 = ProductsService.Interfaces
-		SccProjectUniqueName3 = ProductsService\\ProductsService.csproj
-		SccProjectName3 = ProductsService
-		SccLocalPath3 = ProductsService
-		SccProjectUniqueName4 = ReliableService\\ReliableService.sfproj
-		SccProjectName4 = ReliableService
-		SccLocalPath4 = ReliableService
 	EndGlobalSection
 EndGlobal

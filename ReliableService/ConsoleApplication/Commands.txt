@@ -1,0 +1,3 @@
+﻿ConsoleApplication.exe -apiurl=http://localhost:8282 -command:addproducts -numprod:1000
+
+ConsoleApplication.exe -apiurl=http://localhost:8282 -command:search -searchtext:lorem

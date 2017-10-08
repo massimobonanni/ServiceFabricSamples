@@ -22,7 +22,7 @@ namespace AffidoActor
                 // For more information, see http://aka.ms/servicefabricactorsplatform
 
                 ActorRuntime.RegisterActorAsync<AffidoActor>(
-                   (context, actorType) => new ActorService(context, actorType, () => new AffidoActor())).GetAwaiter().GetResult();
+                   (context, actorType) => new ActorService(context, actorType, (service,id) => new AffidoActor())).GetAwaiter().GetResult();
 
                 Thread.Sleep(Timeout.Infinite);
             }

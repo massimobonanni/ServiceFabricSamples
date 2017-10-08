@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceIoC", "ServiceIoC\ServiceIoC.sfproj", "{3BE7B4A0-3584-40E5-9834-7AA5F641CA38}"
 EndProject
@@ -20,8 +20,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actors", "Actors", "{A00D1EF4-38CE-443D-B7F6-10ABC5F75AC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Test", "WebApi.Test\WebApi.Test.csproj", "{BB35C1BC-67BA-463C-ABF6-F6F723949484}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mocks", "Mocks\Mocks.csproj", "{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffidoActor.Test", "AffidoActor.Test\AffidoActor.Test.csproj", "{1F437A71-FDC8-4B76-BDF6-06DD34449E82}"
 EndProject
@@ -95,14 +93,6 @@ Global
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|x64.ActiveCfg = Release|Any CPU
 		{BB35C1BC-67BA-463C-ABF6-F6F723949484}.Release|x64.Build.0 = Release|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Debug|x64.Build.0 = Debug|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|x64.ActiveCfg = Release|Any CPU
-		{EBAA6B5D-E4B6-4E7C-BA4E-95DCAA5ECA40}.Release|x64.Build.0 = Release|Any CPU
 		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F437A71-FDC8-4B76-BDF6-06DD34449E82}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -161,64 +151,5 @@ Global
 		{75815A2D-536C-4795-852A-49E2BD53521D} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
 		{8ADEDE75-A60D-4178-BC6A-BD6CAA622844} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
 		{3C27995C-748C-4BEA-A87B-E05FCACB980E} = {D76BC563-A0AE-48EB-AB71-CDD586D37958}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mabonann.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = AffidoActor.Interfaces\\AffidoActor.Interfaces.csproj
-		SccProjectTopLevelParentUniqueName1 = ServiceIoC.sln
-		SccProjectName1 = AffidoActor.Interfaces
-		SccLocalPath1 = AffidoActor.Interfaces
-		SccProjectUniqueName2 = AffidoActor\\AffidoActor.csproj
-		SccProjectTopLevelParentUniqueName2 = ServiceIoC.sln
-		SccProjectName2 = AffidoActor
-		SccLocalPath2 = AffidoActor
-		SccProjectUniqueName3 = Core\\Core.csproj
-		SccProjectName3 = Core
-		SccLocalPath3 = Core
-		SccProjectUniqueName4 = ServiceIoC\\ServiceIoC.sfproj
-		SccProjectName4 = ServiceIoC
-		SccLocalPath4 = ServiceIoC
-		SccProjectUniqueName5 = WebApi.Core\\WebApi.Core.csproj
-		SccProjectTopLevelParentUniqueName5 = ServiceIoC.sln
-		SccProjectName5 = WebApi.Core
-		SccLocalPath5 = WebApi.Core
-		SccProjectUniqueName6 = WebApi\\WebApi.csproj
-		SccProjectTopLevelParentUniqueName6 = ServiceIoC.sln
-		SccProjectName6 = WebApi
-		SccLocalPath6 = WebApi
-		SccProjectUniqueName7 = WebApi.Test\\WebApi.Test.csproj
-		SccProjectTopLevelParentUniqueName7 = ServiceIoC.sln
-		SccProjectName7 = WebApi.Test
-		SccLocalPath7 = WebApi.Test
-		SccProjectUniqueName8 = Mocks\\Mocks.csproj
-		SccProjectName8 = Mocks
-		SccLocalPath8 = Mocks
-		SccProjectUniqueName9 = AffidoActor.Test\\AffidoActor.Test.csproj
-		SccProjectTopLevelParentUniqueName9 = ServiceIoC.sln
-		SccProjectName9 = AffidoActor.Test
-		SccLocalPath9 = AffidoActor.Test
-		SccProjectUniqueName10 = OdlActor\\OdlActor.csproj
-		SccProjectTopLevelParentUniqueName10 = ServiceIoC.sln
-		SccProjectName10 = OdlActor
-		SccLocalPath10 = OdlActor
-		SccProjectUniqueName11 = OdlActor.Interfaces\\OdlActor.Interfaces.csproj
-		SccProjectTopLevelParentUniqueName11 = ServiceIoC.sln
-		SccProjectName11 = OdlActor.Interfaces
-		SccLocalPath11 = OdlActor.Interfaces
-		SccProjectUniqueName12 = AnagraficaService\\AnagraficaService.csproj
-		SccProjectTopLevelParentUniqueName12 = ServiceIoC.sln
-		SccProjectName12 = AnagraficaService
-		SccLocalPath12 = AnagraficaService
-		SccProjectUniqueName13 = AnagraficaService.Interfaces\\AnagraficaService.Interfaces.csproj
-		SccProjectTopLevelParentUniqueName13 = ServiceIoC.sln
-		SccProjectName13 = AnagraficaService.Interfaces
-		SccLocalPath13 = AnagraficaService.Interfaces
-		SccProjectUniqueName14 = AnagraficaService.Test\\AnagraficaService.Test.csproj
-		SccProjectTopLevelParentUniqueName14 = ServiceIoC.sln
-		SccProjectName14 = AnagraficaService.Test
-		SccLocalPath14 = AnagraficaService.Test
 	EndGlobalSection
 EndGlobal

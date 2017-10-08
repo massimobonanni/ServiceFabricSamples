@@ -10,7 +10,7 @@ namespace WebApi.Response.SequenceController
     public class GetNextSequenceResponse
     {
         [JsonProperty("value")]
-        public int Value { get; set; }
+        public long Value { get; set; }
         [JsonProperty("nodeInfo")]
         public string NodeInfo { get; set; }
         [JsonProperty("actorId")]

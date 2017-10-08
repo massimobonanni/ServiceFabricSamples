@@ -6,7 +6,7 @@ namespace SequenceActor.Interfaces
     public class SequenceDto
     {
         [DataMember]
-        public int Value { get; set; }
+        public long Value { get; set; }
         [DataMember]
         public string NodeInfo { get; set; }
         [DataMember]

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/ServiceIoC" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="AnagraficaService_PartitionCount" Value="1" />
+    <Parameter Name="AnagraficaService_MinReplicaSetSize" Value="1" />
+    <Parameter Name="AnagraficaService_TargetReplicaSetSize" Value="1" />
+    <Parameter Name="WebApi_InstanceCount" Value="1" />
+    <Parameter Name="AffidoActorService_PartitionCount" Value="1" />
+    <Parameter Name="OdlActorService_PartitionCount" Value="1" />
+    <Parameter Name="AffidoActorService_TargetReplicaSetSize" Value="1" />
+    <Parameter Name="AffidoActorService_MinReplicaSetSize" Value="1" />
+    <Parameter Name="OdlActorService_TargetReplicaSetSize" Value="1" />
+    <Parameter Name="OdlActorService_MinReplicaSetSize" Value="1" />
+  </Parameters>
+</Application>

@@ -101,10 +101,6 @@
       <Project>{79f1ec06-1fa9-43d6-abfc-114fe5a967c7}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mocks\Mocks.csproj">
-      <Project>{ebaa6b5d-e4b6-4e7c-ba4e-95dcaa5eca40}</Project>
-      <Name>Mocks</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

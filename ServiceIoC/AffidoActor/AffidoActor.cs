@@ -25,14 +25,11 @@ namespace AffidoActor
     [StatePersistence(StatePersistence.Persisted)]
     internal class AffidoActor : StatefulActor<AffidoState>, IAffidoActor
     {
-        public AffidoActor() : base()
-        {
-        }
 
-        public AffidoActor(IActorStateManager stateManager,
-            IActorFactory actorFactory, IServiceFactory serviceFactory,
-            ActorId actorId = null, Uri serviceUri = null) :
-            base(stateManager, actorFactory, serviceFactory, actorId, serviceUri)
+        public AffidoActor(ActorService actorService, ActorId actorId,
+            IActorFactory actorFactory = null, IServiceFactory serviceFactory = null,
+             Uri serviceUri = null, IActorStateManager stateManager = null) :
+            base(actorService, actorId, actorFactory, serviceFactory, serviceUri, stateManager)
         {
         }
 

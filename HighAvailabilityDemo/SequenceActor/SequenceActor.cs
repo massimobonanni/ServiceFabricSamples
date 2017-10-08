@@ -37,14 +37,14 @@ namespace SequenceActor
 
         protected override Task OnActivateAsync()
         {
-            ActorEventSource.Current.ActorMessage(this, "Actor activated.");
+            ActorEventSource.Current.ActorMessage(this, "Actor activated."); 
 
-            return this.StateManager.TryAddStateAsync(SequenceStatusKey, 0);
+            return this.StateManager.TryAddStateAsync(SequenceStatusKey, (long)0);
         }
 
         public async Task<SequenceDto> GetNextSequenceAsync()
         {
-            var currentSequence = await this.StateManager.GetStateAsync<int>(SequenceStatusKey);
+            var currentSequence = await this.StateManager.GetOrAddStateAsync<long>(SequenceStatusKey, (long)0);
 
             var returnData = new SequenceDto()
             {
@@ -52,8 +52,8 @@ namespace SequenceActor
                 NodeInfo = this.ActorService.Context.NodeContext.NodeName,
                 PackageVersion = this.ActorService.Context.CodePackageActivationContext.CodePackageVersion
             };
-
-            await this.StateManager.SetStateAsync<int>(SequenceStatusKey, ++currentSequence);
+            //CheckHealth(currentSequence);
+            await this.StateManager.SetStateAsync<long>(SequenceStatusKey, ++currentSequence);
 
             return returnData;
         }
@@ -66,7 +66,7 @@ namespace SequenceActor
             if (currentSequence % 1000 == 0)
             {
                 ReportHealthInformation(this.Id.ToString(), HealtPropertyName, "Sequence multiplo di 1000",
-                    HealthState.Error, 60);
+                    HealthState.Error, 120);
             }
             else if (currentSequence % 500 == 0)
             {
@@ -79,7 +79,7 @@ namespace SequenceActor
             }
         }
 
-        protected void ReportHealthInformation(string sourceId, string property, string description, 
+        protected void ReportHealthInformation(string sourceId, string property, string description,
             HealthState state, int secondsToLive)
         {
             HealthInformation healthInformation = new HealthInformation(sourceId, property, state);

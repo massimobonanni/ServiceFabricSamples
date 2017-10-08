@@ -15,14 +15,9 @@ namespace Core.Actors
         protected readonly IActorFactory ActorFactory;
         protected readonly IServiceFactory ServiceFactory;
 
-        public StatefulActor() : this(null, null, null)
-        {
-
-        }
-
-        public StatefulActor(IActorStateManager stateManager,
-            IActorFactory actorFactory, IServiceFactory serviceFactory,
-            ActorId actorId = null, Uri serviceUri = null) : base()
+        public StatefulActor(ActorService actorService, ActorId actorId,
+            IActorFactory actorFactory = null, IServiceFactory serviceFactory = null,
+             Uri serviceUri = null, IActorStateManager stateManager = null) : base(actorService, actorId)
         {
             _stateManager = stateManager;
             _id = actorId;

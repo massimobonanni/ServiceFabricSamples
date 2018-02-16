@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ActorTimerReminder", "ActorTimerReminder\ActorTimerReminder.sfproj", "{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}"
 EndProject
@@ -20,6 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|Any CPU.Build.0 = Debug|x64
+		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|x64.ActiveCfg = Debug|x64
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|x64.Build.0 = Debug|x64
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Debug|x64.Deploy.0 = Debug|x64
@@ -28,12 +30,14 @@ Global
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Release|x64.Build.0 = Release|x64
 		{F6441E3C-E7DA-432A-9FC4-1AB0831DE40A}.Release|x64.Deploy.0 = Release|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Debug|Any CPU.Build.0 = Debug|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Debug|x64.ActiveCfg = Debug|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Debug|x64.Build.0 = Debug|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Release|Any CPU.ActiveCfg = Release|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Release|x64.ActiveCfg = Release|x64
 		{EDFF79D7-40E4-43DA-B0D0-77A9AA0A0858}.Release|x64.Build.0 = Release|x64
 		{BFE18B77-3F4F-45B4-B4DB-3379520D41D9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{BFE18B77-3F4F-45B4-B4DB-3379520D41D9}.Debug|Any CPU.Build.0 = Debug|x64
 		{BFE18B77-3F4F-45B4-B4DB-3379520D41D9}.Debug|x64.ActiveCfg = Debug|x64
 		{BFE18B77-3F4F-45B4-B4DB-3379520D41D9}.Debug|x64.Build.0 = Debug|x64
 		{BFE18B77-3F4F-45B4-B4DB-3379520D41D9}.Release|Any CPU.ActiveCfg = Release|x64
@@ -51,22 +55,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mabonann.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ActorTimerReminder\\ActorTimerReminder.sfproj
-		SccProjectName1 = ActorTimerReminder
-		SccLocalPath1 = ActorTimerReminder
-		SccProjectUniqueName2 = ConsoleApplication\\ConsoleApplication.csproj
-		SccProjectName2 = ConsoleApplication
-		SccLocalPath2 = ConsoleApplication
-		SccProjectUniqueName3 = MyActor.Interfaces\\MyActor.Interfaces.csproj
-		SccProjectName3 = MyActor.Interfaces
-		SccLocalPath3 = MyActor.Interfaces
-		SccProjectUniqueName4 = MyActor\\MyActor.csproj
-		SccProjectName4 = MyActor
-		SccLocalPath4 = MyActor
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {381342D1-48A7-4AFC-BD85-5BEA244647EF}
 	EndGlobalSection
 EndGlobal

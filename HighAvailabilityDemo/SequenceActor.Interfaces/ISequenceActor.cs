@@ -9,6 +9,7 @@ namespace SequenceActor.Interfaces
 {
     public interface ISequenceActor : IActor
     {
-       Task<SequenceDto> GetNextSequenceAsync();
+        Task<SequenceDto> GetNextSequenceAsync();
+
     }
 }

@@ -14,11 +14,19 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            var actor = ActorProxy.Create<IMyActor>(new ActorId("test"),
-                new Uri("fabric:/ActorTimerReminder/MyActorService"));
+            var numActors = 1000;
+            var timeToReminder = TimeSpan.FromMinutes(3);
+            var actorUri = new Uri("fabric:/ActorTimerReminder/MyActorService");
+            for (int i = 0; i < numActors; i++)
+            {
+                var actorId = Guid.NewGuid().ToString();
+                var actor = ActorProxy.Create<IMyActor>(new ActorId(actorId), actorUri);
+                Console.WriteLine($"Scheduling - Actor {actorId} - TimeToReminder {timeToReminder}");
+                actor.ScheduleReminder(timeToReminder);
+                Console.WriteLine($"Scheduled - Actor {actorId} - TimeToReminder {timeToReminder}");
+            }
 
-            var result = actor.GetCountAsync().Result;
-          
+            Console.WriteLine("Completed");
             Console.ReadLine();
         }
     }

@@ -35,20 +35,20 @@ namespace SequenceActor
 
         private const string SequenceStatusKey = "SequenceKey";
 
-        protected override Task OnActivateAsync()
+        protected override async Task OnActivateAsync()
         {
-            ActorEventSource.Current.ActorMessage(this, "Actor activated."); 
+            ActorEventSource.Current.ActorMessage(this, "Actor activated.");
 
-            return this.StateManager.TryAddStateAsync(SequenceStatusKey, (long)0);
+            var result = await this.StateManager.TryAddStateAsync(SequenceStatusKey, (long)0);
         }
 
         public async Task<SequenceDto> GetNextSequenceAsync()
         {
-            var currentSequence = await this.StateManager.GetOrAddStateAsync<long>(SequenceStatusKey, (long)0);
+            var currentSequence = await this.StateManager.GetOrAddStateAsync<long>(SequenceStatusKey, 0);
 
             var returnData = new SequenceDto()
             {
-                Value = currentSequence,
+                Value = (int)currentSequence,
                 NodeInfo = this.ActorService.Context.NodeContext.NodeName,
                 PackageVersion = this.ActorService.Context.CodePackageActivationContext.CodePackageVersion
             };

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Fabric;
+using System.Fabric.Health;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,15 +25,15 @@ namespace MyActor
     internal class MyActor : Actor, IMyActor, IRemindable
     {
 
-        public static string QueueName = "queue";
+        public MyActor(ActorService actorService, ActorId actorId) : base(actorService, actorId)
+        {
+        }
 
-        private IActorTimer Timer;
-        private IActorReminder Reminder;
         /// <summary>
         /// This method is called whenever an actor is activated.
         /// An actor is activated the first time any of its methods are invoked.
         /// </summary>
-        protected override async Task OnActivateAsync()
+        protected override Task OnActivateAsync()
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
 
@@ -40,69 +42,35 @@ namespace MyActor
             // Any serializable object can be saved in the StateManager.
             // For more information, see http://aka.ms/servicefabricactorsstateserialization
 
-            //Timer = RegisterTimer(a => Increment(), null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(20));
-
-            //await this.StateManager.EnqueueAsync<Queue<Guid>>(QueueName, new Queue<Guid>());
-
-            // decido di farlo partire alle 19:15
-
-            //Reminder = await RegisterReminderAtTimeAsync("MyReminder", new byte[] { 0, 1, 2, 3, 4 },
-            //    TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20));
-
-            //Reminder = await RegisterReminderAtTimeAsync("MyReminder", new byte[] { 0, 1, 2, 3, 4 },
-            //    TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(20));
-
-            await this.StateManager.TryAddStateAsync("count", 0);
-        }
-
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <returns></returns>
-        async Task<int> IMyActor.GetCountAsync()
-        {
-            Reminder = await RegisterReminderAsync("MyReminder", new byte[] { 0, 1, 2, 3, 4 },
-                TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20));
-
-            Reminder = await RegisterReminderAsync("MyReminder", new byte[] { 0, 1, 2, 3, 4 },
-                TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(20));
-
-            return await this.StateManager.GetStateAsync<int>("count");
-        }
-
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        Task IMyActor.SetCountAsync(int count)
-        {
-            // Requests are not guaranteed to be processed in order nor at most once.
-            // The update function here verifies that the incoming count is greater than the current count to preserve order.
-            return this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
-        }
-
-
-        private async Task Increment()
-        {
-            ActorEventSource.Current.ActorMessage(this, $"{DateTime.Now: HH:mm:ss} Increment.");
-            await this.StateManager.AddOrUpdateStateAsync("count", 0, (key, value) => value++);
-            var count = await (this as IMyActor).GetCountAsync();
-            ActorEventSource.Current.ActorMessage(this, $"Incremented {count}.");
-        }
-
-        public Task ReceiveReminderAsync(string reminderName,
-            byte[] context, TimeSpan dueTime, TimeSpan period)
-        {
-            ActorEventSource.Current.ActorMessage(this, $" ReceiveReminderAsync - {DateTime.Now: HH:mm:ss} {reminderName} - dueTime {dueTime}, period {period}.");
-
-            var queue = this.StateManager.DequeueAsync<Queue<Guid>>(QueueName);
-
-
-
             return Task.Delay(0);
         }
 
+
+        public Task ReceiveReminderAsync(string reminderName,
+                 byte[] context, TimeSpan dueTime, TimeSpan period)
+        {
+            ActorEventSource.Current.ActorMessage(this, $" ReceiveReminderAsync - {DateTime.Now: HH:mm:ss} {reminderName} - dueTime {dueTime}, period {period}.");
+            ReportHealthInformation(this.GetActorId().GetStringId(), DefaultReminderName,
+                $" ReceiveReminderAsync - {DateTime.Now: HH:mm:ss} {reminderName} - dueTime {dueTime}, period {period}.",
+                HealthState.Error, 600);
+            return Task.Delay(0);
+        }
+
+
+        protected void ReportHealthInformation(string sourceId, string property, string description,
+            HealthState state, int secondsToLive)
+        {
+            HealthInformation healthInformation = new HealthInformation(sourceId, property, state);
+            healthInformation.Description = description;
+            if (secondsToLive > 0) healthInformation.TimeToLive = TimeSpan.FromSeconds(secondsToLive);
+            healthInformation.RemoveWhenExpired = true;
+            try
+            {
+                var activationContext = FabricRuntime.GetActivationContext();
+                activationContext.ReportApplicationHealth(healthInformation);
+            }
+            catch { }
+        }
 
         protected Task<IActorReminder> RegisterReminderAtTimeAsync(string reminderName,
             byte[] state, TimeSpan startTime, TimeSpan period)
@@ -117,6 +85,16 @@ namespace MyActor
             return RegisterReminderAsync(reminderName, state, dueTime, period);
         }
 
+        private const string DefaultReminderName = "defaultReminder";
+
+        public Task ScheduleReminder(TimeSpan timeToRemind, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            ActorEventSource.Current.ActorMessage(this, $"ScheduleReminder --> Expired at {timeToRemind}");
+            ReportHealthInformation(this.GetActorId().GetStringId(), DefaultReminderName,
+                $" ScheduleReminder - {DateTime.Now: HH:mm:ss} timeToRemind {timeToRemind}.",
+                HealthState.Warning, 60);
+            return this.RegisterReminderAsync(DefaultReminderName, null, timeToRemind,TimeSpan.FromMilliseconds(-1));
+        }
 
     }
 }

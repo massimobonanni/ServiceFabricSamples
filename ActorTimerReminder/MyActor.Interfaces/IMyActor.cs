@@ -13,17 +13,6 @@ namespace MyActor.Interfaces
     /// </summary>
     public interface IMyActor : IActor
     {
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <returns></returns>
-        Task<int> GetCountAsync();
-
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        Task SetCountAsync(int count);
+        Task ScheduleReminder(TimeSpan timeToRemind, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

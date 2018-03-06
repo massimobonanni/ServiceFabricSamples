@@ -4,5 +4,5 @@ This solution contains all the demos that show some Service Fabric Actor Model f
 
 You can find this demos:
 
-- [Fire and Forget](.\Documentation\FireAndForget.md "Fire and Forget")
+- [Fire and Forget](Documentation/FireAndForget.md "Fire and Forget")
 

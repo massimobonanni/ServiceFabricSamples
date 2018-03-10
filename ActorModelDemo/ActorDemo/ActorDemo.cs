@@ -24,7 +24,7 @@ namespace ActorDemo
     /// </remarks>
     [StatePersistence(StatePersistence.Persisted)]
     [ActorService(Name = "ActorDemo")]
-    internal class ActorDemo : Actor, IFireAndForgetActor, IBlockActor, IRemindable
+    internal class ActorDemo : Actor, IFireAndForgetActor, IBlockActor, IStateActor, IRemindable
     {
         /// <summary>
         /// Initializes a new instance of ActorDemo
@@ -117,12 +117,105 @@ namespace ActorDemo
         }
         #endregion [ IRemindable Interface ]
 
-        #region [ IBlockActor ]
+        #region [ IBlockActor interface ]
         public async Task<string> DoLongTimeOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken))
         {
             await Task.Delay(30000, cancellationToken);
             return $"Operation : {operationPayload}";
         }
-        #endregion [ IBlockActor ]
+
+        #endregion [ IBlockActor interface ]
+
+
+        #region [ IStateActor interface ]
+
+        internal const string ContactStateName = "ContactState";
+        internal const string StateTypeStateName = "StateTypeState";
+
+        public Task InitializeActorAsync(StateType stateType, int numberOfContacts, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (numberOfContacts <= 0)
+                throw new ArgumentOutOfRangeException(nameof(numberOfContacts));
+
+            this.StateManager.SetStateAsync<StateType>(StateTypeStateName, stateType, cancellationToken);
+
+            switch (stateType)
+            {
+                case StateType.Wrong:
+                    return CreateWrongStateAsync(numberOfContacts, cancellationToken);
+                case StateType.Right:
+                    return CreateRightStateAsync(numberOfContacts, cancellationToken);
+                default:
+                    return Task.CompletedTask;
+            }
+        }
+
+        private Task CreateWrongStateAsync(int numberOfContacts, CancellationToken cancellationToken)
+        {
+            var contacts = Enumerable.Range(0, numberOfContacts)
+                .Select(i => ContactHelper.CreateRandomContact())
+                .ToList();
+
+            return this.StateManager.SetStateAsync<List<Contact>>(ContactStateName, contacts, cancellationToken);
+        }
+
+        private Task CreateRightStateAsync(int numberOfContacts, CancellationToken cancellationToken)
+        {
+            for (int i = 0; i < numberOfContacts; i++)
+            {
+                this.StateManager.SetStateAsync<Contact>(GetContactKey(i),
+                    ContactHelper.CreateRandomContact(), cancellationToken);
+            }
+            return Task.CompletedTask;
+        }
+
+        public async Task UpdateContactAsync(int contactIndex, Contact contact, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (contactIndex < 0)
+                throw new ArgumentOutOfRangeException(nameof(contactIndex));
+
+            var stateType = await this.StateManager.TryGetStateAsync<StateType>(StateTypeStateName, cancellationToken);
+
+            if (!stateType.HasValue)
+                throw new Exception();
+
+            switch (stateType.Value)
+            {
+                case StateType.Wrong:
+                    await UpdateWrongStateAsync(contactIndex, contact, cancellationToken);
+                    break;
+                case StateType.Right:
+                    await UpdateRightStateAsync(contactIndex, contact, cancellationToken);
+                    break;
+            }
+        }
+
+        private async Task UpdateRightStateAsync(int contactIndex, Contact contact, CancellationToken cancellationToken)
+        {
+            if (!await this.StateManager.ContainsStateAsync(GetContactKey(contactIndex), cancellationToken))
+                throw new IndexOutOfRangeException();
+            await this.StateManager.SetStateAsync<Contact>(GetContactKey(contactIndex), contact, cancellationToken);
+        }
+
+        private async Task UpdateWrongStateAsync(int contactIndex, Contact contact, CancellationToken cancellationToken)
+        {
+            if (!await this.StateManager.ContainsStateAsync(ContactStateName, cancellationToken))
+                throw new IndexOutOfRangeException();
+
+            var contactList = await this.StateManager.GetStateAsync<List<Contact>>(ContactStateName, cancellationToken);
+
+            if (contactIndex>= contactList.Count)
+                throw new IndexOutOfRangeException();
+
+            contactList[contactIndex] = contact;
+
+            await this.StateManager.SetStateAsync<List<Contact>>(ContactStateName, contactList, cancellationToken);
+        }
+
+        private string GetContactKey(int contactIndex)
+        {
+            return $"{ContactStateName}_{contactIndex}";
+        }
+        #endregion [ IStateActor interface ]
     }
 }

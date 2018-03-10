@@ -16,7 +16,8 @@ namespace TestConsole
         private static readonly Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>()
         {
             {"callbackoperation", new CallbackOperationCommand()},
-            {"blockoperation", new BlockedOperationCommand()}
+            {"blockoperation", new BlockedOperationCommand()},
+            {"statemanagement", new StateManagementCommand()}
         };
 
         static void Main(string[] args)

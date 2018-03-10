@@ -6,7 +6,8 @@ You can find this demos:
 
 - [Fire and Forget](Documentation/FireAndForget.md)
 - [Blocked operation](Documentation/BlockedOperation.md)
+- [State Management](Documentation/StateManagement.md)
 
-
+----------
 
 - [Test console ReadMe](TestConsole/ReadMe.md)

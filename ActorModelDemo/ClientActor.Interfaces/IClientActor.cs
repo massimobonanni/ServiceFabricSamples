@@ -17,5 +17,8 @@ namespace ClientActor.Interfaces
         Task<string> GetStatusAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         Task ExecuteOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken));
+
+        Task ExecuteBlockedOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken));
+
     }
 }

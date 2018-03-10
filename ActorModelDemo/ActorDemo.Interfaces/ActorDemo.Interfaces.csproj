@@ -88,6 +88,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBlockActor.cs" />
     <Compile Include="ICallbackActor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IFireAndForgetActor.cs" />

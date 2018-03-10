@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 using ClientActor.Interfaces;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
+using TestConsole.Commands;
 
 namespace TestConsole
 {
     class Program
     {
-        private static readonly Dictionary<string, Func<string[], CancellationToken, Task>> commands = new Dictionary<string, Func<string[], CancellationToken, Task>>()
+        private static readonly Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>()
         {
-            {"callbackoperation", CallbackOperationAsync}
+            {"callbackoperation", new CallbackOperationCommand()},
+            {"blockoperation", new BlockedOperationCommand()}
         };
 
         static void Main(string[] args)
@@ -49,11 +51,11 @@ namespace TestConsole
             Console.WriteLine();
         }
 
-        private static void ExecuteCommand(string[] args, Func<string[], CancellationToken, Task> command)
+        private static void ExecuteCommand(string[] args, ICommand command)
         {
             CancellationTokenSource tokenSource = new CancellationTokenSource();
             ConsoleKeyInfo key;
-            var task = command(args, tokenSource.Token);
+            var task = command.ExuteAsync(args, tokenSource.Token);
             do
             {
                 key = Console.ReadKey();
@@ -61,39 +63,6 @@ namespace TestConsole
 
             tokenSource.Cancel();
             Console.WriteLine();
-        }
-
-        private static async Task CallbackOperationAsync(string[] args, CancellationToken token)
-        {
-            Console.WriteLine();
-            if (args.Count() >= 4)
-            {
-                var serviceUri = new Uri(args[1]);
-                var actorId = new ActorId(args[2]);
-                var operationPayload = args[3];
-
-                var proxy = ActorProxy.Create<IClientActor>(actorId, serviceUri);
-
-                Console.WriteLine("Premere ESC per uscire!");
-
-                Console.WriteLine($"\tActor:{actorId} --> Esecuzione operazione con payload {operationPayload}");
-                await proxy.ExecuteOperationAsync(operationPayload, token);
-
-                while (!token.IsCancellationRequested)
-                {
-                    var status = await proxy.GetStatusAsync(token);
-                    Console.WriteLine($"\tActor:{actorId} --> Stato: {status}");
-                    await Task.Delay(100, token);
-                }
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Parametri errati!");
-                Console.WriteLine();
-            }
-
         }
 
     }

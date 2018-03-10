@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{94ED2BBB-D108-4410-8B52-3AB6F1F29A6A}"
 	ProjectSection(SolutionItems) = preProject
+		Documentation\BlockedOperation.md = Documentation\BlockedOperation.md
 		Documentation\FireAndForget.md = Documentation\FireAndForget.md
 	EndProjectSection
 EndProject

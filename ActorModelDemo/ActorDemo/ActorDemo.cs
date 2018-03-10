@@ -24,7 +24,7 @@ namespace ActorDemo
     /// </remarks>
     [StatePersistence(StatePersistence.Persisted)]
     [ActorService(Name = "ActorDemo")]
-    internal class ActorDemo : Actor, IFireAndForgetActor, IRemindable
+    internal class ActorDemo : Actor, IFireAndForgetActor, IBlockActor, IRemindable
     {
         /// <summary>
         /// Initializes a new instance of ActorDemo
@@ -116,5 +116,13 @@ namespace ActorDemo
             return Task.CompletedTask;
         }
         #endregion [ IRemindable Interface ]
+
+        #region [ IBlockActor ]
+        public async Task<string> DoLongTimeOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await Task.Delay(30000, cancellationToken);
+            return $"Operation : {operationPayload}";
+        }
+        #endregion [ IBlockActor ]
     }
 }

@@ -52,12 +52,12 @@ namespace ClientActor
         }
 
         internal const string StatusStateName = "StatusState";
-        internal const string FireAndForgetActorUri = "fabric:/ActorModelDemo/ActorDemo";
+        internal const string DemoActorUri = "fabric:/ActorModelDemo/ActorDemo";
         public async Task<string> GetStatusAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             ActorEventSource.Current.ActorMessage(this, "Retrieve status.");
             var status = await this.StateManager.TryGetStateAsync<string>(StatusStateName, cancellationToken);
-            return status.HasValue ? status.Value:null ;
+            return status.HasValue ? status.Value : null;
         }
 
         public Task ExecuteOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken))
@@ -66,11 +66,25 @@ namespace ClientActor
             if (operationPayload == null)
                 throw new ArgumentNullException(nameof(operationPayload));
 
-            var proxy = ActorProxy.Create<IFireAndForgetActor>(this.Id, new Uri(FireAndForgetActorUri));
+            var proxy = ActorProxy.Create<IFireAndForgetActor>(this.Id, new Uri(DemoActorUri));
 
             return proxy.DoOperationWithCallbackAsync(this.ToActorReference(), operationPayload, cancellationToken);
 
         }
+
+        public async Task ExecuteBlockedOperationAsync(string operationPayload, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            ActorEventSource.Current.ActorMessage(this, $"ExecuteBlockedOperationAsync {operationPayload}.");
+            if (operationPayload == null)
+                throw new ArgumentNullException(nameof(operationPayload));
+
+            var proxy = ActorProxy.Create<IBlockActor>(this.Id, new Uri(DemoActorUri));
+
+            var result = await proxy.DoLongTimeOperationAsync(operationPayload, cancellationToken);
+
+            await this.StateManager.SetStateAsync<string>(StatusStateName, result, cancellationToken);
+        }
+
 
         #region [ ICallbackActor interface ]
         public Task CallbackAsync(ActorReference caller, string callbackPayload,

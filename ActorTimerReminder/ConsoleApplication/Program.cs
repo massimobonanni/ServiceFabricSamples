@@ -14,7 +14,7 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            var numActors = 1000;
+            var numActors = 1;
             var timeToReminder = TimeSpan.FromMinutes(3);
             var actorUri = new Uri("fabric:/ActorTimerReminder/MyActorService");
             for (int i = 0; i < numActors; i++)

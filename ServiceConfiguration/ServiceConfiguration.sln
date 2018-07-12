@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceConfiguration", "ServiceConfiguration\ServiceConfiguration.sfproj", "{7BFABEFF-39D4-4925-A7C3-A71333C68B88}"
 EndProject
@@ -24,6 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|Any CPU.Build.0 = Debug|x64
+		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.ActiveCfg = Debug|x64
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.Build.0 = Debug|x64
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Debug|x64.Deploy.0 = Debug|x64
@@ -32,12 +34,14 @@ Global
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|x64.Build.0 = Release|x64
 		{7BFABEFF-39D4-4925-A7C3-A71333C68B88}.Release|x64.Deploy.0 = Release|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|Any CPU.Build.0 = Debug|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|x64.ActiveCfg = Debug|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Debug|x64.Build.0 = Debug|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|Any CPU.ActiveCfg = Release|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|x64.ActiveCfg = Release|x64
 		{A31323D9-EF19-4C02-B9C4-A009EBECA4EE}.Release|x64.Build.0 = Release|x64
 		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|Any CPU.Build.0 = Debug|x64
 		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|x64.ActiveCfg = Debug|x64
 		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Debug|x64.Build.0 = Debug|x64
 		{A208C11F-1045-4A96-97FA-27D5D32C273D}.Release|Any CPU.ActiveCfg = Release|x64
@@ -52,6 +56,7 @@ Global
 		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|x64.ActiveCfg = Release|Any CPU
 		{070AA7CC-62D3-45FA-A9F0-AD3262EC0699}.Release|x64.Build.0 = Release|Any CPU
 		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|Any CPU.Build.0 = Debug|x64
 		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|x64.ActiveCfg = Debug|x64
 		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Debug|x64.Build.0 = Debug|x64
 		{6B0F9F51-F235-44DF-85BC-6C976722C86B}.Release|Any CPU.ActiveCfg = Release|x64
@@ -69,28 +74,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mabonann.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ConsoleApplication\\ConsoleApplication.csproj
-		SccProjectName1 = ConsoleApplication
-		SccLocalPath1 = ConsoleApplication
-		SccProjectUniqueName2 = Core\\Core.csproj
-		SccProjectName2 = Core
-		SccLocalPath2 = Core
-		SccProjectUniqueName3 = MyActor.Interfaces\\MyActor.Interfaces.csproj
-		SccProjectName3 = MyActor.Interfaces
-		SccLocalPath3 = MyActor.Interfaces
-		SccProjectUniqueName4 = MyActor\\MyActor.csproj
-		SccProjectName4 = MyActor
-		SccLocalPath4 = MyActor
-		SccProjectUniqueName5 = MyService\\MyService.csproj
-		SccProjectName5 = MyService
-		SccLocalPath5 = MyService
-		SccProjectUniqueName6 = ServiceConfiguration\\ServiceConfiguration.sfproj
-		SccProjectName6 = ServiceConfiguration
-		SccLocalPath6 = ServiceConfiguration
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C71A2A7-F061-4A06-A11C-A33BBBC406E2}
 	EndGlobalSection
 EndGlobal

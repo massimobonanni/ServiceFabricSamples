@@ -43,6 +43,9 @@ namespace MyService
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
+            this.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent += ConfigurationPackageModifiedEvent;
+            this.Context.CodePackageActivationContext.DataPackageModifiedEvent += DataPackageModifiedEvent;
+
             var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
 
             while (true)
@@ -63,16 +66,15 @@ namespace MyService
                     await tx.CommitAsync();
                 }
 
-                var configSection =
-                Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+            }
+        }
 
-                var configValue = configSection.Settings.Sections["MyConfigSection"].Parameters["MyParameter"].Value;
-
-                ServiceEventSource.Current.ServiceMessage(this, $"Configurazione: {configValue}");
-
-                var dataPkg = Context.CodePackageActivationContext.GetDataPackageObject("SvcData");
-
-                var customDataFilePath = $@"{dataPkg.Path}\data.json";
+        private async void DataPackageModifiedEvent(object sender, PackageModifiedEventArgs<DataPackage> e)
+        {
+            if (e.NewPackage.Description.Name == "SvcData")
+            {
+                var customDataFilePath = $@"{e.NewPackage.Path}\data.json";
 
                 string fileContent;
                 using (var reader = File.OpenText(customDataFilePath))
@@ -81,10 +83,18 @@ namespace MyService
                 }
 
                 ServiceEventSource.Current.ServiceMessage(this, $"Data: {fileContent}");
-
-
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }
+        }
+
+        private void ConfigurationPackageModifiedEvent(object sender, PackageModifiedEventArgs<ConfigurationPackage> e)
+        {
+            var configSection =
+                Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+
+            var configValue = configSection.Settings.Sections["MyConfigSection"].Parameters["MyParameter"].Value;
+
+            ServiceEventSource.Current.ServiceMessage(this, $"Configurazione: {configValue}");
+
         }
     }
 }

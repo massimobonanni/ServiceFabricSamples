@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CartActor.Interfaces
+namespace CartActor
 {
     [DataContract]
     internal class ProductData

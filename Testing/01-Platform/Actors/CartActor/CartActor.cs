@@ -11,7 +11,7 @@ using CartActor.Interfaces;
 namespace CartActor
 {
     [StatePersistence(StatePersistence.Persisted)]
-    internal class CartActor : Actor, ICartActor
+    internal class CartActor : Actor, ICartActor, IRemindable
     {
 
         public CartActor(ActorService actorService, ActorId actorId)
@@ -101,5 +101,15 @@ namespace CartActor
             throw new NotImplementedException();
         }
         #endregion [ Interface ICartActor ]
+
+        public Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
+        {
+            if (reminderName == ExpiredReminderName)
+            {
+                // TODO
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }

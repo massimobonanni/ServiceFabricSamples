@@ -4,10 +4,16 @@
     <Parameter Name="CartActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="CartActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="CartActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="OrderActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="OrderActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="OrderActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="OrderActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="CartActorPkg" ServiceManifestVersion="1.0.0" />
   </ServiceManifestImport>
@@ -15,6 +21,11 @@
     <Service Name="CartActorService" GeneratedIdRef="6c08d72a-4066-4be8-939b-0dedef707951|Persisted">
       <StatefulService ServiceTypeName="CartActorServiceType" TargetReplicaSetSize="[CartActorService_TargetReplicaSetSize]" MinReplicaSetSize="[CartActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[CartActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="OrderActorService" GeneratedIdRef="1d23093b-4218-490b-b193-0ff39bd287b2|Persisted">
+      <StatefulService ServiceTypeName="OrderActorServiceType" TargetReplicaSetSize="[OrderActorService_TargetReplicaSetSize]" MinReplicaSetSize="[OrderActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[OrderActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
     <!-- The section below creates instances of service types, when an instance of this 

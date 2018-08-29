@@ -8,4 +8,7 @@
     <Parameter Name="CredentialType" Value="None" />
   </Section>
   <!-- The content will be generated during build -->
+  <Section Name="SqlDataAccess">
+    <Parameter Name="ConnectionString" Value="" MustOverride="true" />
+  </Section>
 </Settings>

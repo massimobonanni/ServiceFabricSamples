@@ -7,6 +7,9 @@ using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using CartActor.Interfaces;
+using System.Data.SqlClient;
+using System.Data;
+using System.Fabric.Description;
 
 namespace CartActor
 {
@@ -22,6 +25,9 @@ namespace CartActor
         protected override Task OnActivateAsync()
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
+            var config = this.ActorService.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+            ReadSettings(config.Settings);
+            this.ActorService.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent += ConfigurationPackageModifiedEvent;
 
             return Task.CompletedTask;
         }
@@ -31,6 +37,8 @@ namespace CartActor
         internal const string ExpiredReminderName = "ExpiredReminder";
 
         internal TimeSpan CartExpiredTimeout = TimeSpan.FromMinutes(5);
+
+        private string connectionString;
 
         #region [ Internal state manager methods ]
         private async Task<State> GetStateFromStateManagerAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -91,12 +99,22 @@ namespace CartActor
             return CartError.GenericError;
         }
 
-        public Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken)
+        public async Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
 
-        
+            if (currentStatus == State.Create)
+            {
+                var productData = await GetProductFromStorageAsync(productId, quantity, cancellationToken);
+                if (productData != null)
+                {
+                    await AddOrUpdateProductIntoStateManagerAsync(productData, cancellationToken);
+                    return CartError.Ok;
+                }
+            }
+
+            return CartError.GenericError;
+        }
 
         public Task<CartError> CreateOrderAsync(List<ProductInfo> products, CancellationToken cancellationToken)
         {
@@ -104,6 +122,7 @@ namespace CartActor
         }
         #endregion [ Interface ICartActor ]
 
+        #region [ Interface IRemindable ]
         public async Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
         {
             if (reminderName == ExpiredReminderName)
@@ -114,5 +133,59 @@ namespace CartActor
             }
 
         }
+        #endregion [ Interface IRemindable ]
+
+        #region [ Private methods ]
+        private async Task<ProductData> GetProductFromStorageAsync(string productId, double quantity, CancellationToken cancellationToken)
+        {
+            ProductData result = null;
+            // This method implements the data access (e.g. using ADO.NET to retrieve data from the database)
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand("CheckProduct", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@ProductId", productId));
+                    cmd.Parameters.Add(new SqlParameter("@Quantity", quantity));
+
+                    using (SqlDataReader sqlDataReader = await cmd.ExecuteReaderAsync(cancellationToken))
+                    {
+                        if (await sqlDataReader.ReadAsync(cancellationToken))
+                        {
+                            result = new ProductData();
+                            result.Id = productId;
+                            result.Quantity = quantity;
+                            result.UnitCost = sqlDataReader.GetFieldValue<decimal>(0);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                result = null;
+            }
+            return result;
+        }
+        #endregion [ Private methods ]
+
+        #region [ Configuration ]
+        private void ConfigurationPackageModifiedEvent(object sender, System.Fabric.PackageModifiedEventArgs<System.Fabric.ConfigurationPackage> e)
+        {
+            ReadSettings(e.NewPackage.Settings);
+        }
+
+        private void ReadSettings(ConfigurationSettings settings)
+        {
+            if (settings.Sections.Contains("SqlDataAccess"))
+            {
+                var dataAccessSection = settings.Sections["SqlDataAccess"];
+                if (dataAccessSection.Parameters.Contains("ConnectionString"))
+                {
+                    this.connectionString = dataAccessSection.Parameters["ConnectionString"].Value;
+                }
+            }
+        }
+        #endregion [ Configuration ]
     }
 }

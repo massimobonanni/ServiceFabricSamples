@@ -102,14 +102,15 @@ namespace CartActor
         }
         #endregion [ Interface ICartActor ]
 
-        public Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
+        public async Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
         {
             if (reminderName == ExpiredReminderName)
             {
-                // TODO
+                var currentState = await GetStateFromStateManagerAsync();
+                if (currentState == State.Initial)
+                    await SetStateIntoStateManagerAsync(State.Expire);
             }
 
-            return Task.CompletedTask;
         }
     }
 }

@@ -16,7 +16,15 @@ namespace CartActor.Test
         internal static CartActor CreateActor(ActorId id)
         {
             Func<ActorService, ActorId, ActorBase> actorFactory = (service, actorId) => new CartActor(service, id);
-            var svc = MockActorServiceFactory.CreateActorServiceForActor<CartActor>(actorFactory);
+            var codePackage = MockCodePackageActivationContext.Default;
+            var configSection = MockConfigurationPackage.CreateConfigurationSection("SqlDataAccess");
+            var configSettings = MockConfigurationPackage.CreateConfigurationSettings(
+                    new MockConfigurationPackage.ConfigurationSectionCollection() { configSection });
+            (codePackage as MockCodePackageActivationContext).ConfigurationPackage = MockConfigurationPackage.CreateConfigurationPackage(configSettings, "Config");
+
+            var context = MockStatefulServiceContextFactory.Create(codePackage, "CartActorType", new Uri("fabric:/TestingApp/CartActor"), Guid.NewGuid(), 0);
+
+            var svc = MockActorServiceFactory.CreateActorServiceForActor<CartActor>(actorFactory, null, context);
             var actor = svc.Activate(id);
             return actor;
         }
@@ -65,7 +73,7 @@ namespace CartActor.Test
             Assert.AreEqual(state, initialState);
         }
 
-        
+
         #endregion [ CreateAsync ]
 
         #region [ ReceiveReminderAsync ]
@@ -81,7 +89,7 @@ namespace CartActor.Test
 
             await actor.InvokeOnActivateAsync();
 
-            await actor.ReceiveReminderAsync(CartActor.ExpiredReminderName,null,TimeSpan.Zero,TimeSpan.Zero);
+            await actor.ReceiveReminderAsync(CartActor.ExpiredReminderName, null, TimeSpan.Zero, TimeSpan.Zero);
 
             var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
             Assert.AreEqual(state, State.Expire);

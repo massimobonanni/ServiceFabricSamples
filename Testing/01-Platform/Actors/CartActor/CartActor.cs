@@ -25,6 +25,7 @@ namespace CartActor
         protected override Task OnActivateAsync()
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
+
             var config = this.ActorService.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
             ReadSettings(config.Settings);
             this.ActorService.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent += ConfigurationPackageModifiedEvent;

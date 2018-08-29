@@ -6,10 +6,11 @@ using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceFabric.Mocks;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace CartActor.Test
 {
-    [TestClass]
     public class CartActorTest
     {
         internal static CartActor CreateActor(ActorId id)
@@ -21,7 +22,7 @@ namespace CartActor.Test
         }
 
         #region [ CreateAsync ]
-        [TestMethod]
+        [Fact]
         public async Task CreateAsync_CartStateInitial_Ok()
         {
             var actorGuid = Guid.NewGuid();
@@ -41,15 +42,19 @@ namespace CartActor.Test
             Assert.IsTrue(reminderCollection.Any(r => r.Name == CartActor.ExpiredReminderName));
         }
 
-        [TestMethod]
-        public async Task CreateAsync_CartStateCreate_Error()
+        [Theory]
+        [InlineData(State.Create)]
+        [InlineData(State.Expire)]
+        [InlineData(State.Close)]
+        public async Task CreateAsync_CartStateNotInitial_Error(object testState)
         {
+            State initialState = (State)testState;
             var actorGuid = Guid.NewGuid();
             var id = new ActorId(actorGuid);
 
             var actor = CreateActor(id);
             var stateManager = (MockActorStateManager)actor.StateManager;
-            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, State.Create);
+            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, initialState);
 
             await actor.InvokeOnActivateAsync();
 
@@ -57,51 +62,15 @@ namespace CartActor.Test
 
             Assert.AreEqual(actual, Interfaces.CartError.GenericError);
             var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
-            Assert.AreEqual(state, State.Create);
+            Assert.AreEqual(state, initialState);
         }
 
-        [TestMethod]
-        public async Task CreateAsync_CartStateExpire_Error()
-        {
-            var actorGuid = Guid.NewGuid();
-            var id = new ActorId(actorGuid);
-
-            var actor = CreateActor(id);
-            var stateManager = (MockActorStateManager)actor.StateManager;
-            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, State.Expire);
-
-            await actor.InvokeOnActivateAsync();
-
-            var actual = await actor.CreateAsync(default(CancellationToken));
-
-            Assert.AreEqual(actual, Interfaces.CartError.GenericError);
-            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
-            Assert.AreEqual(state, State.Expire);
-        }
-
-        [TestMethod]
-        public async Task CreateAsync_CartStateClose_Error()
-        {
-            var actorGuid = Guid.NewGuid();
-            var id = new ActorId(actorGuid);
-
-            var actor = CreateActor(id);
-            var stateManager = (MockActorStateManager)actor.StateManager;
-            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, State.Close);
-
-            await actor.InvokeOnActivateAsync();
-
-            var actual = await actor.CreateAsync(default(CancellationToken));
-
-            Assert.AreEqual(actual, Interfaces.CartError.GenericError);
-            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
-            Assert.AreEqual(state, State.Close);
-        }
+        
         #endregion [ CreateAsync ]
 
         #region [ ReceiveReminderAsync ]
-        [TestMethod]
-        public async Task ReceiveReminderAsync_ExpiredReminder_CartStateInitial_CarteStateBecameExpired()
+        [Fact]
+        public async Task ReceiveReminderAsync_ExpiredReminder_CartStateInitial_CartStateBecameExpired()
         {
             var actorGuid = Guid.NewGuid();
             var id = new ActorId(actorGuid);
@@ -116,6 +85,28 @@ namespace CartActor.Test
 
             var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
             Assert.AreEqual(state, State.Expire);
+        }
+
+        [Theory]
+        [InlineData(State.Create)]
+        [InlineData(State.Expire)]
+        [InlineData(State.Close)]
+        public async Task ReceiveReminderAsync_ExpiredReminder_CartStateNotInitial_StateNotChange(object testState)
+        {
+            State initialState = (State)testState;
+            var actorGuid = Guid.NewGuid();
+            var id = new ActorId(actorGuid);
+
+            var actor = CreateActor(id);
+            var stateManager = (MockActorStateManager)actor.StateManager;
+            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, initialState);
+
+            await actor.InvokeOnActivateAsync();
+
+            await actor.ReceiveReminderAsync(CartActor.ExpiredReminderName, null, TimeSpan.Zero, TimeSpan.Zero);
+
+            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
+            Assert.AreEqual(state, initialState);
         }
         #endregion [ ReceiveReminderAsync ]
     }

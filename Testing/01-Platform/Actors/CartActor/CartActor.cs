@@ -75,11 +75,6 @@ namespace CartActor
         #endregion [ Internal state manager methods ]
 
         #region [ Interface ICartActor]
-        public Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<CartError> CreateAsync(CancellationToken cancellationToken)
         {
             var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
@@ -95,6 +90,13 @@ namespace CartActor
 
             return CartError.GenericError;
         }
+
+        public Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        
 
         public Task<CartError> CreateOrderAsync(List<ProductInfo> products, CancellationToken cancellationToken)
         {

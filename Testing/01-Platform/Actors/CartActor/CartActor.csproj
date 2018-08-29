@@ -118,6 +118,10 @@
       <Project>{5F6026B7-43F1-46D0-AA89-C303FED6E0AF}</Project>
       <Name>CartActor.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OrderActor.Interfaces\OrderActor.Interfaces.csproj">
+      <Project>{5bcc3f93-68d1-4d20-b896-e619fe1d2b59}</Project>
+      <Name>OrderActor.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.ServiceFabric.Actors.3.2.162\build\net45\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\..\packages\Microsoft.ServiceFabric.Actors.3.2.162\build\net45\Microsoft.ServiceFabric.Actors.targets')" />

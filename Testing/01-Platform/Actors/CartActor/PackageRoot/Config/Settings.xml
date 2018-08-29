@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-  <Section Name="CartActorServiceReplicatorConfig">
-    <Parameter Name="ReplicatorEndpoint" Value="CartActorServiceReplicatorEndpoint" />
-    <Parameter Name="BatchAcknowledgementInterval" Value="0.005" />
-  </Section>
-  <Section Name="CartActorServiceReplicatorSecurityConfig">
-    <Parameter Name="CredentialType" Value="None" />
-  </Section>
   <!-- The content will be generated during build -->
   <Section Name="SqlDataAccess">
     <Parameter Name="ConnectionString" Value="" MustOverride="true" />
+  </Section>
+  <Section Name="CartActorReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="CartActorReplicatorEndpoint" />
+    <Parameter Name="BatchAcknowledgementInterval" Value="0.005" />
+  </Section>
+  <Section Name="CartActorReplicatorSecurityConfig">
+    <Parameter Name="CredentialType" Value="None" />
   </Section>
 </Settings>

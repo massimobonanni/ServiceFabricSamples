@@ -12,6 +12,7 @@ namespace OrderActor
 {
 
     [StatePersistence(StatePersistence.Persisted)]
+    [ActorService(Name = "OrderActor")]
     internal class OrderActor : Actor, IOrderActor
     {
 

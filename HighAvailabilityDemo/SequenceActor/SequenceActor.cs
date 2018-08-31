@@ -39,7 +39,7 @@ namespace SequenceActor
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
 
-            var result = await this.StateManager.TryAddStateAsync(SequenceStatusKey, (long)0);
+            await this.StateManager.TryAddStateAsync(SequenceStatusKey, (long)0);
         }
 
         public async Task<SequenceDto> GetNextSequenceAsync()
@@ -48,7 +48,7 @@ namespace SequenceActor
 
             var returnData = new SequenceDto()
             {
-                Value = (int)currentSequence,
+                Value = currentSequence,
                 NodeInfo = this.ActorService.Context.NodeContext.NodeName,
                 PackageVersion = this.ActorService.Context.CodePackageActivationContext.CodePackageVersion
             };
@@ -61,7 +61,7 @@ namespace SequenceActor
         #region Health
         private const string HealtPropertyName = "Sequence";
 
-        private void CheckHealth(int currentSequence)
+        private void CheckHealth(long currentSequence)
         {
             if (currentSequence % 1000 == 0)
             {

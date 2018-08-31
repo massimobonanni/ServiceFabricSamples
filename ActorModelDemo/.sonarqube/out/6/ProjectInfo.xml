@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>ActorModelDemo.Core</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>30ee7513-3dbc-4125-9239-e027a004e0f8</ProjectGuid>
+  <FullPath>C:\sviluppo\ServiceFabricSamples\ActorModelDemo\ActorModelDemo.Core\ActorModelDemo.Core.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\sviluppo\ServiceFabricSamples\ActorModelDemo\.sonarqube\out\6\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">C:\sviluppo\ServiceFabricSamples\ActorModelDemo\ActorModelDemo.Core\bin\Debug\ActorModelDemo.Core.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">C:\sviluppo\ServiceFabricSamples\ActorModelDemo\.sonarqube\out\6</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+</ProjectInfo>

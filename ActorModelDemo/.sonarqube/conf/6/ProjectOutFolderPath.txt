@@ -1,0 +1,1 @@
+C:\sviluppo\ServiceFabricSamples\ActorModelDemo\.sonarqube\out\6

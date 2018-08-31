@@ -17,7 +17,9 @@
   </CodePackage>
 
   <ConfigPackage Name="Config" Version="1.0.0" />
+
   <DataPackage Name="SvcData" Version="1.0.0" />
+
   <Resources>
     <Endpoints>
       <Endpoint Name="ServiceEndpoint" />

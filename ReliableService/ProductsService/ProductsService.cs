@@ -60,7 +60,7 @@ namespace ProductsService
         private async Task EnsureProductList()
         {
             if (products == null)
-                products = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, ProductDto>>(ProductListName);
+                products = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, ProductDto>>("products");
         }
 
         public async Task<IEnumerable<ProductDto>> SearchProducts(string searchText)
@@ -118,6 +118,31 @@ namespace ProductsService
                 }
             }
             return true;
+        }
+
+
+        public async Task AddProduct(string key, ProductDto value, CancellationToken cancellationToken)
+        {
+            bool retry = false;
+            do
+            {
+                try
+                {
+                    using (ITransaction tx = base.StateManager.CreateTransaction())
+                    {
+                        await products.AddAsync(tx, key, value, TimeSpan.FromSeconds(5), cancellationToken);
+
+                        await tx.CommitAsync();
+                    }
+                    retry = true;
+                }
+                catch (TimeoutException)
+                {
+                    await Task.Delay(100, cancellationToken);
+                    retry = true;
+                }
+            } while (retry);
+
         }
     }
 }

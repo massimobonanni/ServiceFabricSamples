@@ -96,5 +96,9 @@ namespace MyActor
             return this.RegisterReminderAsync(DefaultReminderName, null, timeToRemind,TimeSpan.FromMilliseconds(-1));
         }
 
+        public Task DoSomethingAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

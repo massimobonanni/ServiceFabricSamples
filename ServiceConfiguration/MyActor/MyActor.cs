@@ -9,6 +9,7 @@ using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using MyActor.Interfaces;
 using Core;
+using System.Fabric;
 
 namespace MyActor
 {
@@ -31,12 +32,19 @@ namespace MyActor
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
 
+            ReadConfiguration(this.ActorService.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config"));
+            this.ActorService.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent += ConfigurationPackageModifiedEvent;
             // The StateManager is this actor's private state store.
             // Data stored in the StateManager will be replicated for high-availability for actors that use volatile or persisted state storage.
             // Any serializable object can be saved in the StateManager.
             // For more information, see http://aka.ms/servicefabricactorsstateserialization
 
             return this.StateManager.TryAddStateAsync("count", 0);
+        }
+
+        private void ConfigurationPackageModifiedEvent(object sender, PackageModifiedEventArgs<ConfigurationPackage> e)
+        {
+            ReadConfiguration(e.NewPackage);
         }
 
         /// <summary>
@@ -60,15 +68,18 @@ namespace MyActor
             return this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
         }
 
+        private string ActorSetting;
+
+        private void ReadConfiguration(ConfigurationPackage package)
+        {
+            var configSection = package.Settings.Sections["MySection"];
+
+            ActorSetting = configSection.Parameters["MyParameter"].Value;
+        }
+
         public Task<string> GetConfiguration()
         {
-            var configSection =
-                ActorService.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
-
-            var configValue = configSection.Settings.Sections["MySection"].Parameters["MyParameter"].Value;
-
-
-            return Task.FromResult(configValue);
+            return Task.FromResult(ActorSetting);
         }
 
         public async Task<string> GetFile()

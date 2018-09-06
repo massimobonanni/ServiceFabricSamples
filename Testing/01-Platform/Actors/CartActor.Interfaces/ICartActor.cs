@@ -17,7 +17,7 @@ namespace CartActor.Interfaces
 
         Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken);
 
-        Task<CartError> CreateOrderAsync(List<ProductInfo> products, CancellationToken cancellationToken);
+        Task<CartError> CreateOrderAsync( CancellationToken cancellationToken);
 
 
     }

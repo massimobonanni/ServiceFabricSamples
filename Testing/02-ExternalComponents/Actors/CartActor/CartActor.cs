@@ -129,7 +129,7 @@ namespace CartActor
             return CartError.GenericError;
         }
 
-        public async Task<CartError> CreateOrderAsync(List<ProductInfo> products, CancellationToken cancellationToken)
+        public async Task<CartError> CreateOrderAsync( CancellationToken cancellationToken)
         {
             var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
 

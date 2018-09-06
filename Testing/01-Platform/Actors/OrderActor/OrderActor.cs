@@ -40,7 +40,7 @@ namespace OrderActor
         }
         private Task SetStateIntoStateManagerAsync(State state, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return this.StateManager.SetStateAsync<State>(StateKeyName, state, cancellationToken);
+            return this.StateManager.SetStateAsync(StateKeyName, state, cancellationToken);
         }
 
         private string GenerateProductKey(string productId)

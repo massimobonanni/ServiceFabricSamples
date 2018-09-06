@@ -105,6 +105,9 @@ namespace CartActor
 
         public async Task<CartError> AddProductAsync(string productId, double quantity, CancellationToken cancellationToken)
         {
+            if (productId == null)
+                throw new ArgumentNullException(nameof(productId));
+                
             var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
 
             if (currentStatus == State.Create)
@@ -170,7 +173,8 @@ namespace CartActor
         #endregion [ Interface IRemindable ]
 
         #region [ Private methods ]
-        private async Task<ProductData> GetProductFromStorageAsync(string productId, double quantity, CancellationToken cancellationToken)
+        private async Task<ProductData> GetProductFromStorageAsync(string productId, double quantity, 
+            CancellationToken cancellationToken)
         {
             ProductData result = null;
             // This method implements the data access (e.g. using ADO.NET to retrieve data from the database)

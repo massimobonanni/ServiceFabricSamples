@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartActor.Test", "Test\Cart
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{42239484-721E-4635-A1EE-2CC06F093A27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Test", "Test\Integration.Test\Integration.Test.csproj", "{3C5B5903-9E9A-4392-93BA-24E20F735EB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,14 @@ Global
 		{42239484-721E-4635-A1EE-2CC06F093A27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42239484-721E-4635-A1EE-2CC06F093A27}.Release|x64.ActiveCfg = Release|Any CPU
 		{42239484-721E-4635-A1EE-2CC06F093A27}.Release|x64.Build.0 = Release|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Debug|x64.Build.0 = Debug|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +108,7 @@ Global
 		{B4F2B4D1-7CBA-4A20-A1C1-6FE7623FA95D} = {706782EC-F668-45C9-871C-4C1473D841FE}
 		{5BCC3F93-68D1-4D20-B896-E619FE1D2B59} = {706782EC-F668-45C9-871C-4C1473D841FE}
 		{47D660C0-7834-42B5-A0FB-CA00F7C5B58B} = {5D08F366-422F-4EB7-AA8B-14949F08E269}
+		{3C5B5903-9E9A-4392-93BA-24E20F735EB5} = {5D08F366-422F-4EB7-AA8B-14949F08E269}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E7F9671-6EC2-4EF0-8509-B1D555840461}

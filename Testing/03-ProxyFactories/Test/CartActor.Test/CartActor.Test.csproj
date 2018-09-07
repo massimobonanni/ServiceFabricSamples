@@ -151,6 +151,10 @@
       <Project>{fb7e45e3-6f37-4378-a79a-a3b5ee3220ee}</Project>
       <Name>CartActor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Actors\OrderActor.Interfaces\OrderActor.Interfaces.csproj">
+      <Project>{5bcc3f93-68d1-4d20-b896-e619fe1d2b59}</Project>
+      <Name>OrderActor.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{42239484-721e-4635-a1ee-2cc06f093a27}</Project>
       <Name>Core</Name>

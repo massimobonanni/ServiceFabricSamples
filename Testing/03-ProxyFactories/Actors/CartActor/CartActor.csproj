@@ -124,7 +124,7 @@
       <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\CartActor.Interfaces\CartActor.Interfaces.csproj">
-      <Project>{5F6026B7-43F1-46D0-AA89-C303FED6E0AF}</Project>
+      <Project>{5f6026b7-43f1-46d0-aa89-c303fed6e0af}</Project>
       <Name>CartActor.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrderActor.Interfaces\OrderActor.Interfaces.csproj">

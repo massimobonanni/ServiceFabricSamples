@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using OrderActor.Interfaces;
 using ServiceFabric.Mocks;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -244,5 +246,163 @@ namespace CartActor.Test
         }
         #endregion [ AddProductAsync ]
 
+        #region [ CreateOrderAsync ]
+        [Fact]
+        public async Task CreateOrderAsync_CartCreateWithProducts_ReturnOK()
+        {
+            var product1 = new ProductData()
+            {
+                Id = "PRODUCT1",
+                Quantity = 10,
+                UnitCost = 2
+            };
+            var product2 = new ProductData()
+            {
+                Id = "PRODUCT2",
+                Quantity = 1,
+                UnitCost = 5
+            };
+
+            var actorGuid = Guid.NewGuid();
+            var id = new ActorId(actorGuid);
+
+            var orderActor = new Mock<IOrderActor>();
+
+            var actorFactory = new Mock<IActorFactory>();
+            actorFactory.Setup(f => f.Create<IOrderActor>(id, new Uri("fabric:/TestingApp/OrderActor"), null))
+                .Returns(orderActor.Object);
+
+            orderActor.Setup(a => a.CreateAsync(It.IsAny<List<OrderActor.Interfaces.ProductInfo>>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(OrderError.Ok);
+
+            var actor = CreateActor(id, actorFactory.Object, null, null);
+            var stateManager = (MockActorStateManager)actor.StateManager;
+
+            await actor.InvokeOnActivateAsync();
+            await stateManager.SetStateAsync(CartActor.StateKeyName, State.Create);
+
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product1.Id}", product1);
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product2.Id}", product2);
+
+            var result = await actor.CreateOrderAsync(default(CancellationToken));
+
+            Assert.AreEqual(CartError.Ok, result);
+            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
+            Assert.AreEqual(state, State.Close);
+        }
+
+        [Fact]
+        public async Task CreateOrderAsync_CartCreateWithoutProducts_ReturnError()
+        {
+            var actorGuid = Guid.NewGuid();
+            var id = new ActorId(actorGuid);
+
+            var orderActor = new Mock<IOrderActor>();
+
+            var actorFactory = new Mock<IActorFactory>();
+            actorFactory.Setup(f => f.Create<IOrderActor>(id, new Uri("fabric:/TestingApp/OrderActor"), null))
+                .Returns(orderActor.Object);
+
+            var actor = CreateActor(id, actorFactory.Object, null, null);
+            var stateManager = (MockActorStateManager)actor.StateManager;
+
+            await actor.InvokeOnActivateAsync();
+            await stateManager.SetStateAsync(CartActor.StateKeyName, State.Create);
+
+            var result = await actor.CreateOrderAsync(default(CancellationToken));
+
+            Assert.AreEqual(CartError.GenericError, result);
+            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
+            Assert.AreEqual(state, State.Create);
+        }
+
+        [Fact]
+        public async Task CreateOrderAsync_OrderAlreadyExists_ReturnError()
+        {
+            var product1 = new ProductData()
+            {
+                Id = "PRODUCT1",
+                Quantity = 10,
+                UnitCost = 2
+            };
+            var product2 = new ProductData()
+            {
+                Id = "PRODUCT2",
+                Quantity = 1,
+                UnitCost = 5
+            };
+
+            var actorGuid = Guid.NewGuid();
+            var id = new ActorId(actorGuid);
+
+            var orderActor = new Mock<IOrderActor>();
+
+            var actorFactory = new Mock<IActorFactory>();
+            actorFactory.Setup(f => f.Create<IOrderActor>(id, new Uri("fabric:/TestingApp/OrderActor"), null))
+                .Returns(orderActor.Object);
+
+            orderActor.Setup(a => a.CreateAsync(It.IsAny<List<OrderActor.Interfaces.ProductInfo>>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(OrderError.GenericError);
+
+            var actor = CreateActor(id, actorFactory.Object, null, null);
+            var stateManager = (MockActorStateManager)actor.StateManager;
+
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product1.Id}", product1);
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product2.Id}", product2);
+
+            await actor.InvokeOnActivateAsync();
+            await stateManager.SetStateAsync(CartActor.StateKeyName, State.Create);
+
+            var result = await actor.CreateOrderAsync(default(CancellationToken));
+
+            Assert.AreEqual(CartError.GenericError, result);
+            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
+            Assert.AreEqual(state, State.Create);
+        }
+
+        [Fact]
+        public async Task CreateOrderAsync_OrderThrowException_ReturnError()
+        {
+            var product1 = new ProductData()
+            {
+                Id = "PRODUCT1",
+                Quantity = 10,
+                UnitCost = 2
+            };
+            var product2 = new ProductData()
+            {
+                Id = "PRODUCT2",
+                Quantity = 1,
+                UnitCost = 5
+            };
+
+            var actorGuid = Guid.NewGuid();
+            var id = new ActorId(actorGuid);
+
+            var orderActor = new Mock<IOrderActor>();
+
+            var actorFactory = new Mock<IActorFactory>();
+            actorFactory.Setup(f => f.Create<IOrderActor>(id, new Uri("fabric:/TestingApp/OrderActor"), null))
+                .Returns(orderActor.Object);
+
+            orderActor.Setup(a => a.CreateAsync(It.IsAny<List<OrderActor.Interfaces.ProductInfo>>(), It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new Exception());
+
+            var actor = CreateActor(id, actorFactory.Object, null, null);
+            var stateManager = (MockActorStateManager)actor.StateManager;
+
+            await actor.InvokeOnActivateAsync();
+            await stateManager.SetStateAsync(CartActor.StateKeyName, State.Create);
+
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product1.Id}", product1);
+            await stateManager.SetStateAsync($"{CartActor.ProductKeyNamePrefix}{product2.Id}", product2);
+
+            var result = await actor.CreateOrderAsync(default(CancellationToken));
+
+            Assert.AreEqual(CartError.GenericError, result);
+            var state = await stateManager.GetStateAsync<State>(CartActor.StateKeyName);
+            Assert.AreEqual(state, State.Create);
+        }
+        #endregion [ CreateOrderAsync ]
     }
 }

@@ -51,8 +51,6 @@ namespace CartActor
 
         internal TimeSpan CartExpiredTimeout = TimeSpan.FromMinutes(5);
 
-        private string connectionString;
-
         #region [ Internal state manager methods ]
         private async Task<State> GetStateFromStateManagerAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -132,7 +130,7 @@ namespace CartActor
             return CartError.GenericError;
         }
 
-        public async Task<CartError> CreateOrderAsync(List<ProductInfo> products, CancellationToken cancellationToken)
+        public async Task<CartError> CreateOrderAsync(CancellationToken cancellationToken)
         {
             var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
 

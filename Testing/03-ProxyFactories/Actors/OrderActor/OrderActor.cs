@@ -7,17 +7,19 @@ using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using OrderActor.Interfaces;
+using Core.Interfaces;
 
 namespace OrderActor
 {
 
     [StatePersistence(StatePersistence.Persisted)]
     [ActorService(Name = "OrderActor")]
-    internal class OrderActor : Actor, IOrderActor
+    internal class OrderActor : Core.Implementations.ActorBase, IOrderActor
     {
 
-        public OrderActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
+        public OrderActor(ActorService actorService, ActorId actorId,
+            IActorFactory actorFactory, IServiceFactory serviceFactory)
+            : base(actorService, actorId, actorFactory, serviceFactory)
         {
         }
 
@@ -91,6 +93,7 @@ namespace OrderActor
                 }
 
                 await SetStateIntoStateManagerAsync(State.Create, cancellationToken);
+                return OrderError.Ok;
             }
 
             return OrderError.GenericError;

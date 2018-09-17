@@ -171,7 +171,7 @@ namespace CartActor
             if (reminderName == ExpiredReminderName)
             {
                 var currentState = await GetStateFromStateManagerAsync();
-                if (currentState == State.Initial)
+                if (currentState == State.Initial || currentState == State.Create)
                     await SetStateIntoStateManagerAsync(State.Expire);
             }
 

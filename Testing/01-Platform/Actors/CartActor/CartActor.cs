@@ -107,7 +107,7 @@ namespace CartActor
         {
             if (productId == null)
                 throw new ArgumentNullException(nameof(productId));
-                
+
             var currentStatus = await GetStateFromStateManagerAsync(cancellationToken);
 
             if (currentStatus == State.Create)
@@ -130,11 +130,11 @@ namespace CartActor
             if (currentStatus == State.Create)
             {
                 var productList = await CreateProductListForOrderAsync(cancellationToken);
-                if (productList!=null && productList.Any())
+                if (productList != null && productList.Any())
                 {
                     OrderError createResult = OrderError.GenericError;
 
-                    var orderProxy = ActorProxy.Create<IOrderActor>(this.Id, 
+                    var orderProxy = ActorProxy.Create<IOrderActor>(this.Id,
                         new Uri("fabric:/TestingApp/OrderActor"));
 
                     try
@@ -165,7 +165,7 @@ namespace CartActor
             if (reminderName == ExpiredReminderName)
             {
                 var currentState = await GetStateFromStateManagerAsync();
-                if (currentState == State.Initial)
+                if (currentState == State.Initial || currentState == State.Create)
                     await SetStateIntoStateManagerAsync(State.Expire);
             }
 
@@ -173,7 +173,7 @@ namespace CartActor
         #endregion [ Interface IRemindable ]
 
         #region [ Private methods ]
-        private async Task<ProductData> GetProductFromStorageAsync(string productId, double quantity, 
+        private async Task<ProductData> GetProductFromStorageAsync(string productId, double quantity,
             CancellationToken cancellationToken)
         {
             ProductData result = null;

@@ -82,15 +82,19 @@ namespace CartActor.Test
         #endregion [ CreateAsync ]
 
         #region [ ReceiveReminderAsync ]
-        [Fact]
-        public async Task ReceiveReminderAsync_ExpiredReminder_CartStateInitial_CartStateBecameExpired()
+        [Theory]
+        [InlineData(State.Initial)]
+        [InlineData(State.Create)]
+        public async Task ReceiveReminderAsync_ExpiredReminder_CartStateInitial_CartStateBecameExpired(object testState)
         {
+            State initialState = (State)testState;
+
             var actorGuid = Guid.NewGuid();
             var id = new ActorId(actorGuid);
 
             var actor = CreateActor(id);
             var stateManager = (MockActorStateManager)actor.StateManager;
-            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, State.Initial);
+            await stateManager.SetStateAsync<State>(CartActor.StateKeyName, initialState);
 
             await actor.InvokeOnActivateAsync();
 
@@ -101,12 +105,12 @@ namespace CartActor.Test
         }
 
         [Theory]
-        [InlineData(State.Create)]
         [InlineData(State.Expire)]
         [InlineData(State.Close)]
         public async Task ReceiveReminderAsync_ExpiredReminder_CartStateNotInitial_StateNotChange(object testState)
         {
             State initialState = (State)testState;
+
             var actorGuid = Guid.NewGuid();
             var id = new ActorId(actorGuid);
 
@@ -130,6 +134,7 @@ namespace CartActor.Test
             var productId = "PRODUCT1";
             double quantity = 1;
             decimal unitCost = 10;
+
             var actorGuid = Guid.NewGuid();
             var id = new ActorId(actorGuid);
 

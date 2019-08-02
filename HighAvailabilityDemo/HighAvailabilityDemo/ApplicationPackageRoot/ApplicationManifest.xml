@@ -10,7 +10,7 @@
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="WebApiPkg" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="WebApiPkg" ServiceManifestVersion="1.0.1" />
     <ConfigOverrides />
   </ServiceManifestImport>
   <ServiceManifestImport>

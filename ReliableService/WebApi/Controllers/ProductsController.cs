@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
 using ProductsService.Interfaces;
 
 namespace WebApi.Controllers

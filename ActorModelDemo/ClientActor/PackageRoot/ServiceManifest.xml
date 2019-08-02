@@ -10,7 +10,7 @@
             <ReplicatorConfigSection Name="ClientActorReplicatorConfig" />
             <ReplicatorSecurityConfigSection Name="ClientActorReplicatorSecurityConfig" />
             <StoreConfigSection Name="ClientActorLocalStoreConfig" />
-            <ServiceEndpointV2 Name="ClientActorEndpointV2" />
+            <ServiceEndpoint Name="ClientActorEndpoint" />
           </GeneratedNames>
         </Extension>
       </Extensions>
@@ -28,6 +28,7 @@
     <Endpoints>
       <Endpoint Name="ClientActorEndpointV2" />
       <Endpoint Name="ClientActorReplicatorEndpoint" />
+      <Endpoint Name="ClientActorEndpoint" />
     </Endpoints>
   </Resources>
   <!-- The content will be generated during build -->

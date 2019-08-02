@@ -68,6 +68,7 @@ namespace ActorDemo
 
         public async Task DoOperationWithCallbackAsync(ActorReference caller, string operationPayload, CancellationToken cancellationToken)
         {
+            await this.StateManager.AddStateAsync("MioStatoIntero", 10);
             if (await this.StateManager.GetQueueLengthAsync(FireAndForgetQueueName, cancellationToken) > 0)
             {
                 ActorEventSource.Current.ActorMessage(this, "Operation busy!");
